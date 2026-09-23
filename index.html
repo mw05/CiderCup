@@ -179,98 +179,83 @@
     </div>
 
     <script>
-        // HARDCODE YOUR DEPLOYED URL HERE FOR YOUR GITHUB PAGES SITE
-        const DEFAULT_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzPru9sZJmvtLlWxb-KWmwejUyWYEZ8A2sITdRyMYCRpbjNX-bPFIzt8beCo9KkDhBekg/exec";
+    // HARDCODE YOUR DEPLOYED URL HERE
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzPru9sZJmvtLlWxb-KWmwejUyWYEZ8A2sITdRyMYCRpbjNX-bPFIzt8beCo9KkDhBekg/exec";
 
-        // Elements1
-        const webAppUrlInput = document.getElementById('webAppUrl');
-        const form = document.getElementById('selectionForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const btnText = document.getElementById('btnText');
-        const btnSpinner = document.getElementById('btnSpinner');
-        const statusBox = document.getElementById('statusBox');
+    // Form elements
+    const form = document.getElementById('selectionForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
+    const btnSpinner = document.getElementById('btnSpinner');
+    const statusBox = document.getElementById('statusBox');
 
-        // Pre-fill input if default exists
-        if (DEFAULT_SCRIPT_URL) {
-            webAppUrlInput.value = DEFAULT_SCRIPT_URL;
-        }
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
 
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
+        // Set Loading UI State
+        setLoading(true);
+        hideStatus();
 
-            // Determine Web App URL
-            const targetUrl = webAppUrlInput.value.trim() || DEFAULT_SCRIPT_URL;
+        // Build payload matching Google Apps Script structure
+        const payload = {
+            name: document.getElementById('name').value,
+            r1_sel1: document.getElementById('r1_sel1').value,
+            r1_sel2: document.getElementById('r1_sel2').value,
+            r2_sel1: document.getElementById('r2_sel1').value,
+            r2_sel2: document.getElementById('r2_sel2').value,
+            r3_sel1: document.getElementById('r3_sel1').value,
+            r3_sel2: document.getElementById('r3_sel2').value
+        };
 
-            if (!targetUrl) {
-                showStatus('Please enter or hardcode a valid Google Apps Script Web App URL.', 'error');
-                webAppUrlInput.focus();
-                return;
-            }
-
-            // Set Loading UI State
-            setLoading(true);
-            hideStatus();
-
-            // Build payload matching Google Apps Script structure
-            const payload = {
-                name: document.getElementById('name').value,
-                r1_sel1: document.getElementById('r1_sel1').value,
-                r1_sel2: document.getElementById('r1_sel2').value,
-                r2_sel1: document.getElementById('r2_sel1').value,
-                r2_sel2: document.getElementById('r2_sel2').value,
-                r3_sel1: document.getElementById('r3_sel1').value,
-                r3_sel2: document.getElementById('r3_sel2').value
-            };
-
-            // Post request to Google Apps Script
-            fetch(targetUrl, {
-                method: 'POST',
-                mode: 'no-cors', // Bypasses strict CORS issues for Google Web Apps
-                headers: {
-                    'Content-Type': 'text/plain'
-                },
-                body: JSON.stringify(payload)
-            })
-            .then(() => {
-                showStatus('Success! Your selections have been saved to the spreadsheet.', 'success');
-                form.reset();
-            })
-            .catch(err => {
-                console.error('Submission error:', err);
-                showStatus('An error occurred while submitting. Please check your Script URL and try again.', 'error');
-            })
-            .finally(() => {
-                setLoading(false);
-            });
+        // Post request to Google Apps Script
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors', // Bypasses strict CORS issues for Google Web Apps
+            headers: {
+                'Content-Type': 'text/plain'
+            },
+            body: JSON.stringify(payload)
+        })
+        .then(() => {
+            showStatus('Success! Your selections have been saved to the spreadsheet.', 'success');
+            form.reset();
+        })
+        .catch(err => {
+            console.error('Submission error:', err);
+            showStatus('An error occurred while submitting. Please try again.', 'error');
+        })
+        .finally(() => {
+            setLoading(false);
         });
+    });
 
-        function setLoading(isLoading) {
-            submitBtn.disabled = isLoading;
-            if (isLoading) {
-                btnText.textContent = 'Submitting...';
-                btnSpinner.classList.remove('hidden');
-            } else {
-                btnText.textContent = 'Submit Entry';
-                btnSpinner.classList.add('hidden');
-            }
+    function setLoading(isLoading) {
+        submitBtn.disabled = isLoading;
+        if (isLoading) {
+            btnText.textContent = 'Submitting...';
+            btnSpinner.classList.remove('hidden');
+        } else {
+            btnText.textContent = 'Submit Entry';
+            btnSpinner.classList.add('hidden');
         }
+    }
 
-        function showStatus(message, type) {
-            statusBox.classList.remove('hidden', 'bg-emerald-50', 'text-emerald-800', 'border-emerald-200', 'bg-rose-50', 'text-rose-800', 'border-rose-200');
-            statusBox.classList.add('border');
-            
-            if (type === 'success') {
-                statusBox.classList.add('bg-emerald-50', 'text-emerald-800', 'border-emerald-200');
-            } else {
-                statusBox.classList.add('bg-rose-50', 'text-rose-800', 'border-rose-200');
-            }
-            
-            statusBox.textContent = message;
+    function showStatus(message, type) {
+        statusBox.classList.remove('hidden', 'bg-emerald-50', 'text-emerald-800', 'border-emerald-200', 'bg-rose-50', 'text-rose-800', 'border-rose-200');
+        statusBox.classList.add('border');
+        
+        if (type === 'success') {
+            statusBox.classList.add('bg-emerald-50', 'text-emerald-800', 'border-emerald-200');
+        } else {
+            statusBox.classList.add('bg-rose-50', 'text-rose-800', 'border-rose-200');
         }
+        
+        statusBox.textContent = message;
+    }
 
-        function hideStatus() {
-            statusBox.classList.add('hidden');
-        }
-    </script>
+    function hideStatus() {
+        statusBox.classList.add('hidden');
+    }
+</script>
 </body>
 </html>
