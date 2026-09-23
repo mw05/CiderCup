@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Results Dashboard</title>
+  <title>Results Leaderboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen p-4 sm:p-8">
@@ -13,8 +13,8 @@
     <!-- Navigation Header -->
     <header class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5">
       <div>
-        <h1 class="text-3xl font-bold tracking-tight text-white">Results Dashboard</h1>
-        <p class="text-slate-400 text-sm mt-1">Live selections retrieved from Google Sheets</p>
+        <h1 class="text-3xl font-bold tracking-tight text-white">Results Leaderboard</h1>
+        <p class="text-slate-400 text-sm mt-1">Live scores sorted by total points</p>
       </div>
       <div class="flex items-center gap-3">
         <a href="index.html" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-4 py-2 rounded-lg text-sm transition">
@@ -26,23 +26,19 @@
       </div>
     </header>
 
-    <!-- Search / Filter Controls -->
-    <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700/60 flex flex-col sm:flex-row gap-4 items-center justify-between">
-      <input 
-        type="text" 
-        id="searchInput" 
-        oninput="filterData()" 
-        placeholder="Search entries..." 
-        class="w-full sm:w-72 bg-slate-900 border border-slate-700 text-slate-200 px-4 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-      />
+    <!-- Entry Count & Info Bar -->
+    <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700/60 flex items-center justify-between">
+      <div class="text-sm text-slate-300">
+        Sorted automatically by <span class="font-semibold text-indigo-400">Total Points</span> (Highest to Lowest)
+      </div>
       <div id="rowCount" class="text-xs text-slate-400">
-        Showing <span id="visibleCount">0</span> entries
+        Total Entries: <span id="visibleCount" class="font-bold text-white">0</span>
       </div>
     </div>
 
     <!-- Status Messages -->
     <div id="statusMsg" class="p-4 rounded-lg bg-indigo-950/50 border border-indigo-800 text-indigo-300 text-sm hidden">
-      Loading entries from Google Sheets...
+      Loading leaderboard from Google Sheets...
     </div>
 
     <!-- Results Table -->
@@ -65,8 +61,6 @@
     // Paste your exact Google Apps Script URL here
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzPru9sZJmvtLlWxb-KWmwejUyWYEZ8A2sITdRyMYCRpbjNX-bPFIzt8beCo9KkDhBekg/exec";
 
-    let rawData = [];
-
     async function loadResults() {
       const statusMsg = document.getElementById('statusMsg');
       const tableHeader = document.getElementById('tableHeader');
@@ -84,7 +78,6 @@
           throw new Error(data.error);
         }
 
-        rawData = data;
         statusMsg.classList.add('hidden');
 
         if (!data || data.length === 0) {
@@ -94,7 +87,10 @@
           return;
         }
 
-        renderTable(rawData);
+        // Sort data by total points (descending order)
+        const sortedData = sortDataByPoints(data);
+
+        renderTable(sortedData);
 
       } catch (error) {
         console.error("Fetch error:", error);
@@ -104,17 +100,41 @@
       }
     }
 
+    function sortDataByPoints(items) {
+      if (items.length === 0) return items;
+
+      // Find the exact column header name in your sheet that contains total points
+      const firstRow = items[0];
+      const pointsKey = Object.keys(firstRow).find(key => 
+        key.toLowerCase().includes('total') || 
+        key.toLowerCase().includes('point') || 
+        key.toLowerCase().includes('score')
+      );
+
+      // If a matching points/score column is found, sort descending
+      if (pointsKey) {
+        return items.sort((a, b) => {
+          const valA = parseFloat(a[pointsKey]) || 0;
+          const valB = parseFloat(b[pointsKey]) || 0;
+          return valB - valA; // Descending order (highest first)
+        });
+      }
+
+      // Fallback: Return unsorted if no points column was matched
+      return items;
+    }
+
     function renderTable(items) {
       const tableHeader = document.getElementById('tableHeader');
       const tableBody = document.getElementById('tableBody');
 
       if (items.length === 0) {
-        tableBody.innerHTML = `<tr><td class="p-8 text-center text-slate-500">No matching records found.</td></tr>`;
+        tableBody.innerHTML = `<tr><td class="p-8 text-center text-slate-500">No records found.</td></tr>`;
         document.getElementById('visibleCount').textContent = 0;
         return;
       }
 
-      // Extract keys from first item to build columns dynamically
+      // Extract keys from first item to build dynamic columns
       const columns = Object.keys(items[0]);
 
       // Header row
@@ -134,21 +154,7 @@
       document.getElementById('visibleCount').textContent = items.length;
     }
 
-    function filterData() {
-      const query = document.getElementById('searchInput').value.toLowerCase();
-      if (!query) {
-        renderTable(rawData);
-        return;
-      }
-
-      const filtered = rawData.filter(row => 
-        Object.values(row).some(val => String(val).toLowerCase().includes(query))
-      );
-
-      renderTable(filtered);
-    }
-
-    // Auto load on page load
+    // Auto-load results when the page loads
     window.addEventListener('DOMContentLoaded', loadResults);
   </script>
 
