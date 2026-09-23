@@ -102,20 +102,13 @@
 
     function sortDataByPoints(items) {
       if (items.length === 0) return items;
-
-      // Find the exact column header name in your sheet that contains total points
-      const firstRow = items[0];
-      const pointsKey = Object.keys(firstRow).find(key => 
-        key.toLowerCase().includes('total') || 
-        key.toLowerCase().includes('point') || 
-        key.toLowerCase().includes('score')
       );
 
       // If a matching points/score column is found, sort descending
       if (pointsKey) {
         return items.sort((a, b) => {
-          const valA = parseFloat(a[pointsKey]) || 0;
-          const valB = parseFloat(b[pointsKey]) || 0;
+          const valA = parseFloat(a['Total']) || 0;
+          const valB = parseFloat(b['Total']) || 0;
           return valB - valA; // Descending order (highest first)
         });
       }
