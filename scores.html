@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Golfer Scores</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen p-4 sm:p-8">
+
+  <div class="max-w-6xl mx-auto space-y-6">
+
+    <!-- Shared Top Navigation Header -->
+    <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between py-2.5 sm:py-0 sm:h-16 gap-2 sm:gap-0">
+                <!-- App Brand / Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-emerald-400 flex items-center justify-center text-slate-950 font-black shadow-lg shadow-emerald-900/40">
+                        <!-- Golf Flag Icon -->
+                        <svg class="w-5 h-5 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm0 0h18" />
+                        </svg>
+                    </div>
+                    <span class="font-bold text-base sm:text-lg text-white tracking-tight whitespace-nowrap">Fantasy Cider Cup</span>
+                </div>
+
+                <!-- Navigation Links -->
+                <nav class="flex items-center space-x-1 sm:space-x-2 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
+                    <a href="index.html" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
+                        <span>Selections</span>
+                    </a>
+                    <a href="results.html" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
+                        Results
+                    </a>
+                    <a href="breakdown.html" class="px-3.5 py-2 rounded-lg text-sm font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 shadow-sm flex items-center space-x-2">
+                        Golfer Breakdown
+                    </a>
+                    <a href="rules.html" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
+                        Rules
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Entry Count & Info Bar -->
+    <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700/60 flex items-center justify-between">
+      <div id="rowCount" class="text-xs text-slate-400">
+        Total Golfers: <span id="visibleCount" class="font-bold text-white">0</span>
+      </div>
+    </div>
+
+    <!-- Status Messages -->
+    <div id="statusMsg" class="p-4 rounded-lg bg-indigo-950/50 border border-indigo-800 text-indigo-300 text-sm hidden">
+      Loading scores...
+    </div>
+
+    <!-- Breakdown Table -->
+    <div class="bg-slate-800/40 rounded-xl border border-slate-700/60 overflow-hidden shadow-xl">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm">
+          <thead id="tableHeader" class="bg-slate-800 text-slate-300 border-b border-slate-700 uppercase text-xs font-semibold tracking-wider">
+            <!-- Dynamic Headers -->
+          </thead>
+          <tbody id="tableBody" class="divide-y divide-slate-800 text-slate-300">
+            <!-- Dynamic Rows -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Replace with your Google Apps Script Web App URL if it differs from the results endpoint
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzPru9sZJmvtLlWxb-KWmwejUyWYEZ8A2sITdRyMYCRpbjNX-bPFIzt8beCo9KkDhBekg/exec";
+
+    async function loadBreakdown() {
+      const statusMsg = document.getElementById('statusMsg');
+      const tableHeader = document.getElementById('tableHeader');
+      const tableBody = document.getElementById('tableBody');
+
+      statusMsg.textContent = "Fetching scores data...";
+      statusMsg.classList.remove('hidden', 'bg-red-950/50', 'text-red-300', 'border-red-800');
+      statusMsg.classList.add('bg-indigo-950/50', 'text-indigo-300', 'border-indigo-800');
+
+      try {
+        // Optional action parameter in case your script uses explicit routing (e.g., ?action=breakdown)
+        const response = await fetch(SCRIPT_URL);
+        const data = await response.json();
+
+        if (data.error) {
+          throw new Error(data.error);
+        }
+
+        statusMsg.classList.add('hidden');
+
+        if (!data || data.length === 0) {
+          tableHeader.innerHTML = '';
+          tableBody.innerHTML = `<tr><td class="p-8 text-center text-slate-500">No records found in the breakdown sheet.</td></tr>`;
+          document.getElementById('visibleCount').textContent = 0;
+          return;
+        }
+
+        // Sort data by total points (descending order)
+        const sortedData = sortDataByPoints(data);
+
+        renderTable(sortedData);
+
+      } catch (error) {
+        console.error("Fetch error:", error);
+        statusMsg.textContent = "Failed to load data: " + error.message;
+        statusMsg.classList.remove('hidden', 'bg-indigo-950/50', 'text-indigo-300', 'border-indigo-800');
+        statusMsg.classList.add('bg-red-950/50', 'text-red-300', 'border-red-800');
+      }
+    }
+
+    function sortDataByPoints(items) {
+      if (items.length === 0) return items;
+
+      return items.sort((a, b) => {
+        // Looks for 'Total' column, falls back to 0 if missing/unparseable
+        const valA = parseFloat(a['Total']) || 0;
+        const valB = parseFloat(b['Total']) || 0;
+        return valB - valA; // Descending order (highest first)
+      });
+    }
+
+    function renderTable(items) {
+      const tableHeader = document.getElementById('tableHeader');
+      const tableBody = document.getElementById('tableBody');
+
+      if (items.length === 0) {
+        tableBody.innerHTML = `<tr><td class="p-8 text-center text-slate-500">No records found.</td></tr>`;
+        document.getElementById('visibleCount').textContent = 0;
+        return;
+      }
+
+      // Extract keys from first item to dynamically render columns
+      const columns = Object.keys(items[0]);
+
+      // Header row with '#' for position
+      tableHeader.innerHTML = `
+        <tr>
+          <th class="px-6 py-3 border-b border-slate-700 w-16 text-center">#</th>
+          ${columns.map(col => `<th class="px-6 py-3 border-b border-slate-700">${col}</th>`).join('')}
+        </tr>
+      `;
+
+      // Helper function to render position badges
+      const getRankBadge = (index) => {
+        const pos = index + 1;
+        if (pos === 1) return `<span class="inline-flex items-center justify-center w-7 h-7 bg-amber-500/20 text-amber-400 font-bold rounded-full text-xs border border-amber-500/40">1 🥇</span>`;
+        if (pos === 2) return `<span class="inline-flex items-center justify-center w-7 h-7 bg-slate-300/20 text-slate-300 font-bold rounded-full text-xs border border-slate-400/40">2 🥈</span>`;
+        if (pos === 3) return `<span class="inline-flex items-center justify-center w-7 h-7 bg-amber-700/20 text-amber-500 font-bold rounded-full text-xs border border-amber-600/40">3 🥉</span>`;
+        return `<span class="text-slate-400 font-mono text-xs">${pos}</span>`;
+      };
+
+      // Data rows
+      tableBody.innerHTML = items.map((row, index) => `
+        <tr class="hover:bg-slate-800/50 transition">
+          <td class="px-6 py-4 whitespace-nowrap text-center">${getRankBadge(index)}</td>
+          ${columns.map(col => `<td class="px-6 py-4 whitespace-nowrap">${row[col] ?? ''}</td>`).join('')}
+        </tr>
+      `).join('');
+
+      document.getElementById('visibleCount').textContent = items.length;
+    }
+
+    // Auto-load breakdown data on page load
+    window.addEventListener('DOMContentLoaded', loadBreakdown);
+  </script>
+
+</body>
+</html>
