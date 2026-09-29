@@ -15,11 +15,11 @@
             transition: all 0.2s ease-in-out;
         }
         /* Styling for locked fields */
-.soft-locked {
-    opacity: 0.6;
-    pointer-events: none;
-    background-color: rgba(15, 23, 42, 0.5) !important;
-}
+        .soft-locked {
+            opacity: 0.6;
+            pointer-events: none;
+            background-color: rgba(15, 23, 42, 0.5) !important;
+        }
     </style>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-emerald-500 selection:text-slate-900">
@@ -77,12 +77,13 @@
             </div>
 
             <!-- Lock Status Banner -->
-<div id="lockBanner" class="hidden p-4 rounded-xl border mb-6 text-sm flex items-center space-x-3">
-    <svg class="w-5 h-5 flex-shrink-0 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 002-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-    </svg>
-    <div id="lockMessage" class="text-slate-300"></div>
-</div>
+            <div id="lockBanner" class="hidden p-4 rounded-xl border mb-6 text-sm flex items-center space-x-3">
+                <svg class="w-5 h-5 flex-shrink-0 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 002-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                </svg>
+                <div id="lockMessage" class="text-slate-300"></div>
+            </div>
+
             <!-- Main Entry Form -->
             <form id="selectionForm" class="bg-slate-800/60 backdrop-blur-sm border border-slate-700/60 rounded-2xl shadow-2xl p-6 sm:p-8 space-y-8">
                 
@@ -112,7 +113,6 @@
                 <div class="space-y-4">
                     <div class="flex items-center justify-between border-b border-slate-700/80 pb-3">
                         <div class="flex items-center space-x-2">
-                            <!-- Tee Icon -->
                             <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2v10m-3-6h6m-4 6l-2 10m6-10l2 10" />
                             </svg>
@@ -170,7 +170,6 @@
                 <div class="space-y-4">
                     <div class="flex items-center justify-between border-b border-slate-700/80 pb-3">
                         <div class="flex items-center space-x-2">
-                            <!-- Flag Pin Icon -->
                             <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm0 0h18" />
                             </svg>
@@ -228,7 +227,6 @@
                 <div class="space-y-4">
                     <div class="flex items-center justify-between border-b border-slate-700/80 pb-3">
                         <div class="flex items-center space-x-2">
-                            <!-- Target / Green Hole Icon -->
                             <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <circle cx="12" cy="12" r="9" stroke-width="2"/>
                                 <circle cx="12" cy="12" r="3" fill="currentColor"/>
@@ -306,163 +304,163 @@
     </main>
 
     <script>
-        <script>
-    // HARDCODE YOUR DEPLOYED URL HERE
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzPru9sZJmvtLlWxb-KWmwejUyWYEZ8A2sITdRyMYCRpbjNX-bPFIzt8beCo9KkDhBekg/exec";
+        // HARDCODE YOUR DEPLOYED URL HERE
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzPru9sZJmvtLlWxb-KWmwejUyWYEZ8A2sITdRyMYCRpbjNX-bPFIzt8beCo9KkDhBekg/exec";
 
-    // Form elements
-    const form = document.getElementById('selectionForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const btnText = document.getElementById('btnText');
-    const btnSpinner = document.getElementById('btnSpinner');
-    const statusBox = document.getElementById('statusBox');
-    const lockBanner = document.getElementById('lockBanner');
-    const lockMessage = document.getElementById('lockMessage');
+        // Form elements
+        const form = document.getElementById('selectionForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const btnSpinner = document.getElementById('btnSpinner');
+        const statusBox = document.getElementById('statusBox');
+        const lockBanner = document.getElementById('lockBanner');
+        const lockMessage = document.getElementById('lockMessage');
 
-    // Field mapping for rounds
-    const roundFields = {
-        r1: ['r1_sel1', 'r1_sel2'],
-        r2: ['r2_sel1', 'r2_sel2'],
-        r3: ['r3_sel1', 'r3_sel2']
-    };
-
-    let lockConfig = null;
-
-    // Fetch lock configuration on page load
-    window.addEventListener('DOMContentLoaded', () => {
-        fetchLockStatus();
-    });
-
-    function fetchLockStatus() {
-        fetch(`${SCRIPT_URL}?action=getLockStatus`)
-            .then(res => res.json())
-            .then(data => {
-                lockConfig = data;
-                applyLockingRules(data);
-            })
-            .catch(err => {
-                console.error('Error fetching lock status:', err);
-            });
-    }
-
-    function applyLockingRules(config) {
-        if (!config) return;
-
-        // Check if entire tournament/form is locked
-        if (config.globalLocked) {
-            lockBanner.classList.remove('hidden', 'bg-amber-500/10', 'border-amber-500/30', 'bg-rose-500/10', 'border-rose-500/30');
-            lockBanner.classList.add('bg-rose-500/10', 'border-rose-500/30');
-            lockMessage.textContent = config.globalLockMessage || "Selections are currently locked. Submissions are closed.";
-            
-            // Disable form entirely
-            disableAllFields();
-            return;
-        }
-
-        // Check individual rounds
-        let lockedRoundsText = [];
-        ['r1', 'r2', 'r3'].forEach((round, index) => {
-            if (config[round + 'Locked']) {
-                roundFields[round].forEach(fieldId => {
-                    const el = document.getElementById(fieldId);
-                    if (el) {
-                        el.classList.add('soft-locked');
-                        el.tabIndex = -1; // Prevent keyboard focus
-                        // Remove required attribute so locked fields don't block submitting available rounds
-                        el.removeAttribute('required');
-                    }
-                });
-                lockedRoundsText.push(`Round ${index + 1}`);
-            }
-        });
-
-        if (lockedRoundsText.length > 0) {
-            lockBanner.classList.remove('hidden', 'bg-rose-500/10', 'border-rose-500/30');
-            lockBanner.classList.add('bg-amber-500/10', 'border-amber-500/30');
-            
-            if (config.allowSoftLock) {
-                lockMessage.textContent = `${lockedRoundsText.join(', ')} is locked. You can still submit selections for the open rounds.`;
-            } else {
-                lockMessage.textContent = `${lockedRoundsText.join(', ')} is locked.`;
-            }
-        }
-    }
-
-    function disableAllFields() {
-        const inputs = form.querySelectorAll('input, select, button[type="submit"]');
-        inputs.forEach(el => {
-            el.disabled = true;
-            el.classList.add('opacity-50', 'cursor-not-allowed');
-        });
-    }
-
-    form.addEventListener('submit', async function(e) {
-        e.preventDefault();
-
-        // Set Loading UI State
-        setLoading(true);
-        hideStatus();
-
-        // Build payload matching Google Apps Script structure
-        const payload = {
-            name: document.getElementById('name').value,
-            r1_sel1: document.getElementById('r1_sel1').value,
-            r1_sel2: document.getElementById('r1_sel2').value,
-            r2_sel1: document.getElementById('r2_sel1').value,
-            r2_sel2: document.getElementById('r2_sel2').value,
-            r3_sel1: document.getElementById('r3_sel1').value,
-            r3_sel2: document.getElementById('r3_sel2').value
+        // Field mapping for rounds
+        const roundFields = {
+            r1: ['r1_sel1', 'r1_sel2'],
+            r2: ['r2_sel1', 'r2_sel2'],
+            r3: ['r3_sel1', 'r3_sel2']
         };
 
-        // Post request to Google Apps Script
-        fetch(SCRIPT_URL, {
-            method: 'POST',
-            mode: 'no-cors', // Bypasses strict CORS issues for Google Web Apps
-            headers: {
-                'Content-Type': 'text/plain'
-            },
-            body: JSON.stringify(payload)
-        })
-        .then(() => {
-            showStatus('Success! Your selections have been saved.', 'success');
-            form.reset();
-        })
-        .catch(err => {
-            console.error('Submission error:', err);
-            showStatus('An error occurred while submitting. Please try again.', 'error');
-        })
-        .finally(() => {
-            setLoading(false);
+        let lockConfig = null;
+
+        // Fetch lock configuration on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            fetchLockStatus();
         });
-    });
 
-    function setLoading(isLoading) {
-        submitBtn.disabled = isLoading;
-        if (isLoading) {
-            btnText.textContent = 'Submitting...';
-            btnSpinner.classList.remove('hidden');
-        } else {
-            btnText.textContent = 'Submit Entry';
-            btnSpinner.classList.add('hidden');
+        function fetchLockStatus() {
+            fetch(`${SCRIPT_URL}?action=getLockStatus`)
+                .then(res => res.json())
+                .then(data => {
+                    lockConfig = data;
+                    applyLockingRules(data);
+                })
+                .catch(err => {
+                    console.error('Error fetching lock status:', err);
+                });
         }
-    }
 
-    function showStatus(message, type) {
-        statusBox.classList.remove('hidden', 'bg-emerald-500/10', 'text-emerald-400', 'border-emerald-500/30', 'bg-rose-500/10', 'text-rose-400', 'border-rose-500/30');
-        statusBox.classList.add('border');
-        
-        if (type === 'success') {
-            statusBox.classList.add('bg-emerald-500/10', 'text-emerald-400', 'border-emerald-500/30');
-        } else {
-            statusBox.classList.add('bg-rose-500/10', 'text-rose-400', 'border-rose-500/30');
+        function applyLockingRules(config) {
+            if (!config) return;
+
+            // Check if entire tournament/form is locked
+            if (config.globalLocked) {
+                lockBanner.classList.remove('hidden', 'bg-amber-500/10', 'border-amber-500/30', 'bg-rose-500/10', 'border-rose-500/30');
+                lockBanner.classList.add('bg-rose-500/10', 'border-rose-500/30');
+                lockMessage.textContent = config.globalLockMessage || "Selections are currently locked. Submissions are closed.";
+                
+                // Disable form entirely
+                disableAllFields();
+                return;
+            }
+
+            // Check individual rounds
+            let lockedRoundsText = [];
+            ['r1', 'r2', 'r3'].forEach((round, index) => {
+                if (config[round + 'Locked']) {
+                    roundFields[round].forEach(fieldId => {
+                        const el = document.getElementById(fieldId);
+                        if (el) {
+                            el.classList.add('soft-locked');
+                            el.tabIndex = -1; // Prevent keyboard focus
+                            // Remove required attribute so locked fields don't block submitting available rounds
+                            el.removeAttribute('required');
+                        }
+                    });
+                    lockedRoundsText.push(`Round ${index + 1}`);
+                }
+            });
+
+            if (lockedRoundsText.length > 0) {
+                lockBanner.classList.remove('hidden', 'bg-rose-500/10', 'border-rose-500/30');
+                lockBanner.classList.add('bg-amber-500/10', 'border-amber-500/30');
+                
+                if (config.allowSoftLock) {
+                    lockMessage.textContent = `${lockedRoundsText.join(', ')} is locked. You can still submit selections for the open rounds.`;
+                } else {
+                    lockMessage.textContent = `${lockedRoundsText.join(', ')} is locked.`;
+                }
+            }
         }
-        
-        statusBox.textContent = message;
-    }
 
-    function hideStatus() {
-        statusBox.classList.add('hidden');
-    }
-</script>
+        function disableAllFields() {
+            const inputs = form.querySelectorAll('input, select, button[type="submit"]');
+            inputs.forEach(el => {
+                el.disabled = true;
+                el.classList.add('opacity-50', 'cursor-not-allowed');
+            });
+        }
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Prevent submission if global lock is active
+            if (lockConfig && lockConfig.globalLocked) {
+                showStatus("Submissions are currently locked.", "error");
+                return;
+            }
+
+            // UI Loading state
+            toggleLoading(true);
+            statusBox.classList.add('hidden');
+
+            // Collect Form Data
+            const formData = new FormData(form);
+            formData.append("action", "submitSelections");
+
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: "POST",
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.status === "success") {
+                    showStatus(result.message || "Your selections have been successfully saved!", "success");
+                    
+                    // Re-apply locking rules after successful submission
+                    if (lockConfig) {
+                        applyLockingRules(lockConfig);
+                    }
+                } else {
+                    showStatus(result.message || "There was an error saving your selections. Please try again.", "error");
+                }
+            } catch (error) {
+                console.error("Submission error:", error);
+                showStatus("An error occurred while connecting to the server. Please check your internet connection and try again.", "error");
+            } finally {
+                toggleLoading(false);
+            }
+        });
+
+        // Helper function for status messages
+        function showStatus(message, type) {
+            statusBox.classList.remove('hidden', 'bg-emerald-500/10', 'border-emerald-500/30', 'text-emerald-400', 'bg-rose-500/10', 'border-rose-500/30', 'text-rose-400');
+            
+            if (type === "success") {
+                statusBox.classList.add('bg-emerald-500/10', 'border-emerald-500/30', 'text-emerald-400');
+            } else {
+                statusBox.classList.add('bg-rose-500/10', 'border-rose-500/30', 'text-rose-400');
+            }
+            
+            statusBox.textContent = message;
+            statusBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Consolidated UI Loading Helper
+        function toggleLoading(isLoading) {
+            submitBtn.disabled = isLoading;
+            if (isLoading) {
+                btnText.textContent = 'Submitting...';
+                btnSpinner.classList.remove('hidden');
+            } else {
+                btnText.textContent = 'Submit Selections';
+                btnSpinner.classList.add('hidden');
+            }
+        }
+    </script>
 </body>
 </html>
