@@ -306,6 +306,7 @@
     </main>
 
     <script>
+        <script>
     // HARDCODE YOUR DEPLOYED URL HERE
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzPru9sZJmvtLlWxb-KWmwejUyWYEZ8A2sITdRyMYCRpbjNX-bPFIzt8beCo9KkDhBekg/exec";
 
@@ -315,8 +316,87 @@
     const btnText = document.getElementById('btnText');
     const btnSpinner = document.getElementById('btnSpinner');
     const statusBox = document.getElementById('statusBox');
+    const lockBanner = document.getElementById('lockBanner');
+    const lockMessage = document.getElementById('lockMessage');
 
-    form.addEventListener('submit', function(e) {
+    // Field mapping for rounds
+    const roundFields = {
+        r1: ['r1_sel1', 'r1_sel2'],
+        r2: ['r2_sel1', 'r2_sel2'],
+        r3: ['r3_sel1', 'r3_sel2']
+    };
+
+    let lockConfig = null;
+
+    // Fetch lock configuration on page load
+    window.addEventListener('DOMContentLoaded', () => {
+        fetchLockStatus();
+    });
+
+    function fetchLockStatus() {
+        fetch(`${SCRIPT_URL}?action=getLockStatus`)
+            .then(res => res.json())
+            .then(data => {
+                lockConfig = data;
+                applyLockingRules(data);
+            })
+            .catch(err => {
+                console.error('Error fetching lock status:', err);
+            });
+    }
+
+    function applyLockingRules(config) {
+        if (!config) return;
+
+        // Check if entire tournament/form is locked
+        if (config.globalLocked) {
+            lockBanner.classList.remove('hidden', 'bg-amber-500/10', 'border-amber-500/30', 'bg-rose-500/10', 'border-rose-500/30');
+            lockBanner.classList.add('bg-rose-500/10', 'border-rose-500/30');
+            lockMessage.textContent = config.globalLockMessage || "Selections are currently locked. Submissions are closed.";
+            
+            // Disable form entirely
+            disableAllFields();
+            return;
+        }
+
+        // Check individual rounds
+        let lockedRoundsText = [];
+        ['r1', 'r2', 'r3'].forEach((round, index) => {
+            if (config[round + 'Locked']) {
+                roundFields[round].forEach(fieldId => {
+                    const el = document.getElementById(fieldId);
+                    if (el) {
+                        el.classList.add('soft-locked');
+                        el.tabIndex = -1; // Prevent keyboard focus
+                        // Remove required attribute so locked fields don't block submitting available rounds
+                        el.removeAttribute('required');
+                    }
+                });
+                lockedRoundsText.push(`Round ${index + 1}`);
+            }
+        });
+
+        if (lockedRoundsText.length > 0) {
+            lockBanner.classList.remove('hidden', 'bg-rose-500/10', 'border-rose-500/30');
+            lockBanner.classList.add('bg-amber-500/10', 'border-amber-500/30');
+            
+            if (config.allowSoftLock) {
+                lockMessage.textContent = `${lockedRoundsText.join(', ')} is locked. You can still submit selections for the open rounds.`;
+            } else {
+                lockMessage.textContent = `${lockedRoundsText.join(', ')} is locked.`;
+            }
+        }
+    }
+
+    function disableAllFields() {
+        const inputs = form.querySelectorAll('input, select, button[type="submit"]');
+        inputs.forEach(el => {
+            el.disabled = true;
+            el.classList.add('opacity-50', 'cursor-not-allowed');
+        });
+    }
+
+    form.addEventListener('submit', async function(e) {
         e.preventDefault();
 
         // Set Loading UI State
