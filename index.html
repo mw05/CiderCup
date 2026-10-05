@@ -339,24 +339,81 @@
     </main>
 
     <script>
-    // HARDCODE YOUR DEPLOYED URL HERE
+    // DEPLOYED GOOGLE APPS SCRIPT URL
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzPru9sZJmvtLlWxb-KWmwejUyWYEZ8A2sITdRyMYCRpbjNX-bPFIzt8beCo9KkDhBekg/exec";
+    const MAX_BUDGET = 12;
 
-    // Form elements
+    // Form & UI Elements
     const form = document.getElementById('selectionForm');
     const submitBtn = document.getElementById('submitBtn');
     const btnText = document.getElementById('btnText');
     const btnSpinner = document.getElementById('btnSpinner');
     const statusBox = document.getElementById('statusBox');
 
+    // Budget Tracker UI Elements
+    const dropdowns = document.querySelectorAll('.selection-dropdown');
+    const spentDisplay = document.getElementById('spentDisplay');
+    const remainingDisplay = document.getElementById('remainingDisplay');
+    const budgetBadge = document.getElementById('budgetBadge');
+
+    // Calculate total stars selected across all dropdowns
+    function calculateTotalCost() {
+        let total = 0;
+        dropdowns.forEach(select => {
+            const selectedOption = select.options[select.selectedIndex];
+            if (selectedOption) {
+                const cost = parseInt(selectedOption.getAttribute('data-cost')) || 0;
+                total += cost;
+            }
+        });
+        return total;
+    }
+
+    // Update live star budget UI and disable button if over limit
+    function updateBudgetTracker() {
+        const totalSpent = calculateTotalCost();
+        const remaining = MAX_BUDGET - totalSpent;
+
+        if (spentDisplay) spentDisplay.textContent = totalSpent;
+
+        if (totalSpent > MAX_BUDGET) {
+            // Over Budget State
+            if (budgetBadge) {
+                budgetBadge.textContent = `${Math.abs(remaining)} ⭐ Over Budget`;
+                budgetBadge.className = "px-3.5 py-1.5 rounded-lg text-sm font-bold bg-rose-500/10 border border-rose-500/30 text-rose-400";
+            }
+            submitBtn.disabled = true;
+        } else {
+            // Valid State
+            if (budgetBadge) {
+                budgetBadge.innerHTML = `<span id="remainingDisplay">${remaining}</span> ⭐ Remaining`;
+                budgetBadge.className = "px-3.5 py-1.5 rounded-lg text-sm font-bold bg-emerald-500/10 border border-emerald-500/30 text-emerald-400";
+            }
+            submitBtn.disabled = false;
+        }
+    }
+
+    // Listen for dropdown changes to update budget in real-time
+    dropdowns.forEach(select => {
+        select.addEventListener('change', updateBudgetTracker);
+    });
+
+    // Handle Form Submission
     form.addEventListener('submit', function(e) {
         e.preventDefault();
+
+        // Safety check before sending data
+        const totalSpent = calculateTotalCost();
+        if (totalSpent > MAX_BUDGET) {
+            showStatus(`Star limit exceeded! You used ${totalSpent} stars out of ${MAX_BUDGET}.`, 'error');
+            return;
+        }
 
         // Set Loading UI State
         setLoading(true);
         hideStatus();
 
-        // Build payload matching Google Apps Script structure
+        // Payload for Google Apps Script
         const payload = {
             name: document.getElementById('name').value,
             r1_sel1: document.getElementById('r1_sel1').value,
@@ -364,13 +421,14 @@
             r2_sel1: document.getElementById('r2_sel1').value,
             r2_sel2: document.getElementById('r2_sel2').value,
             r3_sel1: document.getElementById('r3_sel1').value,
-            r3_sel2: document.getElementById('r3_sel2').value
+            r3_sel2: document.getElementById('r3_sel2').value,
+            total_stars_used: totalSpent
         };
 
         // Post request to Google Apps Script
         fetch(SCRIPT_URL, {
             method: 'POST',
-            mode: 'no-cors', // Bypasses strict CORS issues for Google Web Apps
+            mode: 'no-cors',
             headers: {
                 'Content-Type': 'text/plain'
             },
@@ -379,6 +437,7 @@
         .then(() => {
             showStatus('Success! Your selections have been saved.', 'success');
             form.reset();
+            updateBudgetTracker(); // Reset star counter back to 12
         })
         .catch(err => {
             console.error('Submission error:', err);
