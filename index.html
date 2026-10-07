@@ -71,16 +71,16 @@
                 </p>
             </div>
             
-            <!-- Sticky Star Budget Banner -->
-            <div class="sticky top-20 z-40 bg-slate-800/90 backdrop-blur-md border border-slate-700/80 rounded-xl p-4 shadow-xl flex items-center justify-between">
-                <div>
-                    <span class="text-xs uppercase tracking-wider text-slate-400 font-semibold block">Star Budget</span>
-                    <span class="text-sm text-slate-300">Used: <span id="spentDisplay">0</span> / 12 ⭐</span>
-                </div>
-                <div id="budgetBadge" class="px-3.5 py-1.5 rounded-lg text-sm font-bold bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
-                    <span id="remainingDisplay">12</span> ⭐ Remaining
-                </div>
-            </div>
+            <!-- Budget Banner: Fixed bottom on mobile, sticky top on desktop -->
+<div class="fixed sm:sticky bottom-3 sm:bottom-auto sm:top-20 left-3 right-3 sm:left-auto sm:right-auto z-40 bg-slate-800/95 backdrop-blur-md border border-slate-700/80 rounded-xl p-3 sm:p-4 shadow-2xl flex items-center justify-between transition-all">
+    <div>
+        <span class="text-[10px] sm:text-xs uppercase tracking-wider text-slate-400 font-semibold block">Star Budget</span>
+        <span class="text-xs sm:text-sm text-slate-300">Used: <span id="spentDisplay">0</span> / 12 ⭐</span>
+    </div>
+    <div id="budgetBadge" class="px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-lg text-xs sm:text-sm font-bold bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
+        <span id="remainingDisplay">12</span> ⭐ Remaining
+    </div>
+</div>
 
             <!-- Main Entry Form -->
             <form id="selectionForm" class="w-full bg-slate-800/60 backdrop-blur-sm border border-slate-700/60 rounded-2xl shadow-2xl p-6 sm:p-8 space-y-8">
