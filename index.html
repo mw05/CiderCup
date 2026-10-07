@@ -106,12 +106,10 @@
                 </div>
 
                <!-- Selections Grid Container -->
-<!-- Main Container (Wider padding for mobile screens) -->
-<div class="w-full max-w-2xl mx-auto px-2 sm:px-4 space-y-3">
+<form id="selectionForm" class="w-full space-y-3">
 
     <!-- Round 1 Card -->
-    <div class="bg-slate-900/60 border border-slate-700/60 p-2.5 sm:p-4 rounded-xl hover:border-slate-600 transition-colors">
-        <!-- Round Title Header -->
+    <div class="w-full bg-slate-900/60 border border-slate-700/60 p-3 rounded-xl hover:border-slate-600 transition-colors">
         <div class="flex items-center justify-between mb-2">
             <div class="flex items-center space-x-2">
                 <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -124,10 +122,8 @@
             </span>
         </div>
 
-        <!-- Inline Side-by-Side Selections (1 & 2) -->
-        <div class="grid grid-cols-2 gap-2">
-            <!-- Selection 1 -->
-            <div class="flex items-center space-x-1.5">
+        <div class="grid grid-cols-2 gap-1.5 sm:gap-3">
+            <div class="flex items-center space-x-1">
                 <span class="text-xs font-bold text-emerald-400 select-none">1.</span>
                 <select id="r1_sel1" name="r1_sel1" required class="selection-dropdown w-full px-2 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500">
                     <option value="" data-cost="0" class="text-slate-400">Select...</option>
@@ -146,8 +142,7 @@
                 </select>
             </div>
 
-            <!-- Selection 2 -->
-            <div class="flex items-center space-x-1.5">
+            <div class="flex items-center space-x-1">
                 <span class="text-xs font-bold text-emerald-400 select-none">2.</span>
                 <select id="r1_sel2" name="r1_sel2" required class="selection-dropdown w-full px-2 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500">
                     <option value="" data-cost="0" class="text-slate-400">Select...</option>
@@ -169,8 +164,7 @@
     </div>
 
     <!-- Round 2 Card -->
-    <div class="bg-slate-900/60 border border-slate-700/60 p-2.5 sm:p-4 rounded-xl hover:border-slate-600 transition-colors">
-        <!-- Round Title Header -->
+    <div class="w-full bg-slate-900/60 border border-slate-700/60 p-3 rounded-xl hover:border-slate-600 transition-colors">
         <div class="flex items-center justify-between mb-2">
             <div class="flex items-center space-x-2">
                 <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -183,10 +177,8 @@
             </span>
         </div>
 
-        <!-- Inline Side-by-Side Selections (1 & 2) -->
-        <div class="grid grid-cols-2 gap-2">
-            <!-- Selection 1 -->
-            <div class="flex items-center space-x-1.5">
+        <div class="grid grid-cols-2 gap-1.5 sm:gap-3">
+            <div class="flex items-center space-x-1">
                 <span class="text-xs font-bold text-emerald-400 select-none">1.</span>
                 <select id="r2_sel1" name="r2_sel1" required class="selection-dropdown w-full px-2 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500">
                     <option value="" data-cost="0" class="text-slate-400">Select...</option>
@@ -205,8 +197,7 @@
                 </select>
             </div>
 
-            <!-- Selection 2 -->
-            <div class="flex items-center space-x-1.5">
+            <div class="flex items-center space-x-1">
                 <span class="text-xs font-bold text-emerald-400 select-none">2.</span>
                 <select id="r2_sel2" name="r2_sel2" required class="selection-dropdown w-full px-2 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500">
                     <option value="" data-cost="0" class="text-slate-400">Select...</option>
@@ -228,8 +219,7 @@
     </div>
 
     <!-- Round 3 Card -->
-    <div class="bg-slate-900/60 border border-slate-700/60 p-2.5 sm:p-4 rounded-xl hover:border-slate-600 transition-colors">
-        <!-- Round Title Header -->
+    <div class="w-full bg-slate-900/60 border border-slate-700/60 p-3 rounded-xl hover:border-slate-600 transition-colors">
         <div class="flex items-center justify-between mb-2">
             <div class="flex items-center space-x-2">
                 <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -243,10 +233,8 @@
             </span>
         </div>
 
-        <!-- Inline Side-by-Side Selections (1 & 2) -->
-        <div class="grid grid-cols-2 gap-2">
-            <!-- Selection 1 -->
-            <div class="flex items-center space-x-1.5">
+        <div class="grid grid-cols-2 gap-1.5 sm:gap-3">
+            <div class="flex items-center space-x-1">
                 <span class="text-xs font-bold text-amber-400 select-none">1.</span>
                 <select id="r3_sel1" name="r3_sel1" required class="selection-dropdown w-full px-2 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500">
                     <option value="" data-cost="0" class="text-slate-400">Select...</option>
@@ -265,8 +253,7 @@
                 </select>
             </div>
 
-            <!-- Selection 2 -->
-            <div class="flex items-center space-x-1.5">
+            <div class="flex items-center space-x-1">
                 <span class="text-xs font-bold text-amber-400 select-none">2.</span>
                 <select id="r3_sel2" name="r3_sel2" required class="selection-dropdown w-full px-2 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500">
                     <option value="" data-cost="0" class="text-slate-400">Select...</option>
@@ -287,7 +274,7 @@
         </div>
     </div>
 
-</div>
+</form>
 
                 <!-- Status & Action Block -->
                 <div class="pt-4 space-y-4">
