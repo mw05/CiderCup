@@ -106,13 +106,13 @@
                 </div>
 
                <!-- Selections Grid Container -->
-<!-- Compact Selections Layout (Works for all screen sizes) -->
-<div class="space-y-3">
+<!-- Main Container (Wider padding for mobile screens) -->
+<div class="w-full max-w-2xl mx-auto px-2 sm:px-4 space-y-3">
 
-    <!-- Round 1 -->
-    <div class="bg-slate-900/60 border border-slate-700/60 p-3 sm:p-4 rounded-xl hover:border-slate-600 transition-colors">
+    <!-- Round 1 Card -->
+    <div class="bg-slate-900/60 border border-slate-700/60 p-2.5 sm:p-4 rounded-xl hover:border-slate-600 transition-colors">
         <!-- Round Title Header -->
-        <div class="flex items-center justify-between mb-2.5">
+        <div class="flex items-center justify-between mb-2">
             <div class="flex items-center space-x-2">
                 <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2v10m-3-6h6m-4 6l-2 10m6-10l2 10" />
@@ -124,12 +124,12 @@
             </span>
         </div>
 
-        <!-- 2-Column Dropdowns Grid -->
-        <div class="grid grid-cols-2 gap-2.5 sm:gap-4">
+        <!-- Inline Side-by-Side Selections (1 & 2) -->
+        <div class="grid grid-cols-2 gap-2">
             <!-- Selection 1 -->
-            <div>
-                <label for="r1_sel1" class="block text-[11px] font-medium text-slate-400 mb-1">Sel 1 *</label>
-                <select id="r1_sel1" name="r1_sel1" required class="selection-dropdown w-full px-2.5 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500">
+            <div class="flex items-center space-x-1.5">
+                <span class="text-xs font-bold text-emerald-400 select-none">1.</span>
+                <select id="r1_sel1" name="r1_sel1" required class="selection-dropdown w-full px-2 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500">
                     <option value="" data-cost="0" class="text-slate-400">Select...</option>
                     <option value="Dan S" data-cost="3">Dan S ⭐⭐⭐</option>
                     <option value="Dan W" data-cost="3">Dan W ⭐⭐⭐</option>
@@ -147,9 +147,9 @@
             </div>
 
             <!-- Selection 2 -->
-            <div>
-                <label for="r1_sel2" class="block text-[11px] font-medium text-slate-400 mb-1">Sel 2 *</label>
-                <select id="r1_sel2" name="r1_sel2" required class="selection-dropdown w-full px-2.5 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500">
+            <div class="flex items-center space-x-1.5">
+                <span class="text-xs font-bold text-emerald-400 select-none">2.</span>
+                <select id="r1_sel2" name="r1_sel2" required class="selection-dropdown w-full px-2 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500">
                     <option value="" data-cost="0" class="text-slate-400">Select...</option>
                     <option value="Dan S" data-cost="3">Dan S ⭐⭐⭐</option>
                     <option value="Dan W" data-cost="3">Dan W ⭐⭐⭐</option>
@@ -168,10 +168,10 @@
         </div>
     </div>
 
-    <!-- Round 2 -->
-    <div class="bg-slate-900/60 border border-slate-700/60 p-3 sm:p-4 rounded-xl hover:border-slate-600 transition-colors">
+    <!-- Round 2 Card -->
+    <div class="bg-slate-900/60 border border-slate-700/60 p-2.5 sm:p-4 rounded-xl hover:border-slate-600 transition-colors">
         <!-- Round Title Header -->
-        <div class="flex items-center justify-between mb-2.5">
+        <div class="flex items-center justify-between mb-2">
             <div class="flex items-center space-x-2">
                 <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm0 0h18" />
@@ -183,12 +183,12 @@
             </span>
         </div>
 
-        <!-- 2-Column Dropdowns Grid -->
-        <div class="grid grid-cols-2 gap-2.5 sm:gap-4">
+        <!-- Inline Side-by-Side Selections (1 & 2) -->
+        <div class="grid grid-cols-2 gap-2">
             <!-- Selection 1 -->
-            <div>
-                <label for="r2_sel1" class="block text-[11px] font-medium text-slate-400 mb-1">Sel 1 *</label>
-                <select id="r2_sel1" name="r2_sel1" required class="selection-dropdown w-full px-2.5 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500">
+            <div class="flex items-center space-x-1.5">
+                <span class="text-xs font-bold text-emerald-400 select-none">1.</span>
+                <select id="r2_sel1" name="r2_sel1" required class="selection-dropdown w-full px-2 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500">
                     <option value="" data-cost="0" class="text-slate-400">Select...</option>
                     <option value="Dan S" data-cost="3">Dan S ⭐⭐⭐</option>
                     <option value="Dan W" data-cost="3">Dan W ⭐⭐⭐</option>
@@ -206,9 +206,9 @@
             </div>
 
             <!-- Selection 2 -->
-            <div>
-                <label for="r2_sel2" class="block text-[11px] font-medium text-slate-400 mb-1">Sel 2 *</label>
-                <select id="r2_sel2" name="r2_sel2" required class="selection-dropdown w-full px-2.5 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500">
+            <div class="flex items-center space-x-1.5">
+                <span class="text-xs font-bold text-emerald-400 select-none">2.</span>
+                <select id="r2_sel2" name="r2_sel2" required class="selection-dropdown w-full px-2 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500">
                     <option value="" data-cost="0" class="text-slate-400">Select...</option>
                     <option value="Dan S" data-cost="3">Dan S ⭐⭐⭐</option>
                     <option value="Dan W" data-cost="3">Dan W ⭐⭐⭐</option>
@@ -227,10 +227,10 @@
         </div>
     </div>
 
-    <!-- Round 3 -->
-    <div class="bg-slate-900/60 border border-slate-700/60 p-3 sm:p-4 rounded-xl hover:border-slate-600 transition-colors">
+    <!-- Round 3 Card -->
+    <div class="bg-slate-900/60 border border-slate-700/60 p-2.5 sm:p-4 rounded-xl hover:border-slate-600 transition-colors">
         <!-- Round Title Header -->
-        <div class="flex items-center justify-between mb-2.5">
+        <div class="flex items-center justify-between mb-2">
             <div class="flex items-center space-x-2">
                 <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <circle cx="12" cy="12" r="9" stroke-width="2"/>
@@ -243,12 +243,12 @@
             </span>
         </div>
 
-        <!-- 2-Column Dropdowns Grid -->
-        <div class="grid grid-cols-2 gap-2.5 sm:gap-4">
+        <!-- Inline Side-by-Side Selections (1 & 2) -->
+        <div class="grid grid-cols-2 gap-2">
             <!-- Selection 1 -->
-            <div>
-                <label for="r3_sel1" class="block text-[11px] font-medium text-slate-400 mb-1">Sel 1 *</label>
-                <select id="r3_sel1" name="r3_sel1" required class="selection-dropdown w-full px-2.5 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500">
+            <div class="flex items-center space-x-1.5">
+                <span class="text-xs font-bold text-amber-400 select-none">1.</span>
+                <select id="r3_sel1" name="r3_sel1" required class="selection-dropdown w-full px-2 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500">
                     <option value="" data-cost="0" class="text-slate-400">Select...</option>
                     <option value="Dan S" data-cost="3">Dan S ⭐⭐⭐</option>
                     <option value="Dan W" data-cost="3">Dan W ⭐⭐⭐</option>
@@ -266,9 +266,9 @@
             </div>
 
             <!-- Selection 2 -->
-            <div>
-                <label for="r3_sel2" class="block text-[11px] font-medium text-slate-400 mb-1">Sel 2 *</label>
-                <select id="r3_sel2" name="r3_sel2" required class="selection-dropdown w-full px-2.5 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500">
+            <div class="flex items-center space-x-1.5">
+                <span class="text-xs font-bold text-amber-400 select-none">2.</span>
+                <select id="r3_sel2" name="r3_sel2" required class="selection-dropdown w-full px-2 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500">
                     <option value="" data-cost="0" class="text-slate-400">Select...</option>
                     <option value="Dan S" data-cost="3">Dan S ⭐⭐⭐</option>
                     <option value="Dan W" data-cost="3">Dan W ⭐⭐⭐</option>
