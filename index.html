@@ -63,13 +63,23 @@
                         <circle cx="12" cy="12" r="9" stroke-width="2"/>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15a3 3 0 100-6 3 3 0 000 6z"/>
                     </svg>
-                    <span>Tournament Registration</span>
+                    <span>Make your fantasy picks</span>
                 </div>
                 <p class="text-slate-400 max-w-md mx-auto text-sm sm:text-base">
                     Lock in your player selections for each round of the Cider Cup.
                 </p>
             </div>
-
+            
+<!-- Sticky Star Budget Banner -->
+<div class="sticky top-20 z-40 bg-slate-800/90 backdrop-blur-md border border-slate-700/80 rounded-xl p-4 shadow-xl flex items-center justify-between">
+    <div>
+        <span class="text-xs uppercase tracking-wider text-slate-400 font-semibold block">Star Budget</span>
+        <span class="text-sm text-slate-300">Used: <span id="spentDisplay">0</span> / 12 ⭐</span>
+    </div>
+    <div id="budgetBadge" class="px-3.5 py-1.5 rounded-lg text-sm font-bold bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
+        <span id="remainingDisplay">12</span> ⭐ Remaining
+    </div>
+</div>
             <!-- Main Entry Form -->
             <form id="selectionForm" class="bg-slate-800/60 backdrop-blur-sm border border-slate-700/60 rounded-2xl shadow-2xl p-6 sm:p-8 space-y-8">
                 
@@ -114,41 +124,53 @@
                             <label for="r1_sel1" class="block text-sm font-medium text-slate-300 mb-1.5">
                                 Selection 1 <span class="text-rose-400">*</span>
                             </label>
-                            <select id="r1_sel1" name="r1_sel1" required class="w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500">
-                                <option value="" class="bg-slate-900 text-slate-400">Select Option</option>
-                                <option value="Dan S" class="bg-slate-900">Dan S</option>
-                                <option value="Dan W" class="bg-slate-900">Dan W</option>
-                                <option value="Fred O" class="bg-slate-900">Fred O</option>                           
-                                <option value="Fred 2" class="bg-slate-900">Fred 2</option>
-                                <option value="Matt" class="bg-slate-900">Matt</option>
-                                <option value="Jack" class="bg-slate-900">Jack</option>
-                                <option value="Summers" class="bg-slate-900">Summers</option>
-                                <option value="Miller" class="bg-slate-900">Miller</option>
-                                <option value="Haydo" class="bg-slate-900">Haydo</option>
-                                <option value="Luke" class="bg-slate-900">Luke</option>
-                                <option value="Gubbo" class="bg-slate-900">Gubbo</option>
-                                <option value="PK" class="bg-slate-900">PK</option>
-                            </select>
+                            <select id="r1_sel1" name="r1_sel1" required class="selection-dropdown w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500">
+    <option value="" data-cost="0" class="bg-slate-900 text-slate-400">Select Option</option>
+    
+    <!-- 3 Stars -->
+    <option value="Dan S" data-cost="3" class="bg-slate-900">Dan S (⭐⭐⭐)</option>
+    <option value="PK" data-cost="3" class="bg-slate-900">PK (⭐⭐⭐)</option>
+    <option value="Gubbo" data-cost="3" class="bg-slate-900">Gubbo (⭐⭐⭐)</option>
+    <option value="Luke" data-cost="3" class="bg-slate-900">Luke (⭐⭐⭐)</option>
+
+    <!-- 2 Stars -->
+    <option value="Fred O" data-cost="2" class="bg-slate-900">Fred O (⭐⭐)</option>
+    <option value="Fred 2" data-cost="2" class="bg-slate-900">Fred 2 (⭐⭐)</option>
+    <option value="Summers" data-cost="2" class="bg-slate-900">Summers (⭐⭐)</option>
+    <option value="Haydo" data-cost="2" class="bg-slate-900">Haydo (⭐⭐)</option>
+
+    <!-- 1 Star -->
+    <option value="Jack" data-cost="1" class="bg-slate-900">Jack (⭐)</option>
+    <option value="Miller" data-cost="1" class="bg-slate-900">Miller (⭐)</option>
+    <option value="Matt" data-cost="1" class="bg-slate-900">Matt (⭐)</option>
+    <option value="Dan W" data-cost="1" class="bg-slate-900">Dan W (⭐)</option>
+</select>
                         </div>
                         <div>
                             <label for="r1_sel2" class="block text-sm font-medium text-slate-300 mb-1.5">
                                 Selection 2 <span class="text-rose-400">*</span>
                             </label>
-                            <select id="r1_sel2" name="r1_sel2" required class="w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500">
-                                <option value="" class="bg-slate-900 text-slate-400">Select Option</option>
-                                <option value="Dan S" class="bg-slate-900">Dan S</option>
-                                <option value="Dan W" class="bg-slate-900">Dan W</option>
-                                <option value="Fred O" class="bg-slate-900">Fred O</option>                           
-                                <option value="Fred 2" class="bg-slate-900">Fred 2</option>
-                                <option value="Matt" class="bg-slate-900">Matt</option>
-                                <option value="Jack" class="bg-slate-900">Jack</option>
-                                <option value="Summers" class="bg-slate-900">Summers</option>
-                                <option value="Miller" class="bg-slate-900">Miller</option>
-                                <option value="Haydo" class="bg-slate-900">Haydo</option>
-                                <option value="Luke" class="bg-slate-900">Luke</option>
-                                <option value="Gubbo" class="bg-slate-900">Gubbo</option>
-                                <option value="PK" class="bg-slate-900">PK</option>
-                            </select>
+                            <select id="r1_sel2" name="r1_sel2" required class="selection-dropdown w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500">
+    <option value="" data-cost="0" class="bg-slate-900 text-slate-400">Select Option</option>
+    
+    <!-- 3 Stars -->
+    <option value="Dan S" data-cost="3" class="bg-slate-900">Dan S (⭐⭐⭐)</option>
+    <option value="PK" data-cost="3" class="bg-slate-900">PK (⭐⭐⭐)</option>
+    <option value="Gubbo" data-cost="3" class="bg-slate-900">Gubbo (⭐⭐⭐)</option>
+    <option value="Luke" data-cost="3" class="bg-slate-900">Luke (⭐⭐⭐)</option>
+
+    <!-- 2 Stars -->
+    <option value="Fred O" data-cost="2" class="bg-slate-900">Fred O (⭐⭐)</option>
+    <option value="Fred 2" data-cost="2" class="bg-slate-900">Fred 2 (⭐⭐)</option>
+    <option value="Summers" data-cost="2" class="bg-slate-900">Summers (⭐⭐)</option>
+    <option value="Haydo" data-cost="2" class="bg-slate-900">Haydo (⭐⭐)</option>
+
+    <!-- 1 Star -->
+    <option value="Jack" data-cost="1" class="bg-slate-900">Jack (⭐)</option>
+    <option value="Miller" data-cost="1" class="bg-slate-900">Miller (⭐)</option>
+    <option value="Matt" data-cost="1" class="bg-slate-900">Matt (⭐)</option>
+    <option value="Dan W" data-cost="1" class="bg-slate-900">Dan W (⭐)</option>
+</select>
                         </div>
                     </div>
                 </div>
@@ -172,41 +194,53 @@
                             <label for="r2_sel1" class="block text-sm font-medium text-slate-300 mb-1.5">
                                 Selection 1 <span class="text-rose-400">*</span>
                             </label>
-                            <select id="r2_sel1" name="r2_sel1" required class="w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500">
-                                <option value="" class="bg-slate-900 text-slate-400">Select Option</option>
-                                <option value="Dan S" class="bg-slate-900">Dan S</option>
-                                <option value="Dan W" class="bg-slate-900">Dan W</option>
-                                <option value="Fred O" class="bg-slate-900">Fred O</option>                           
-                                <option value="Fred 2" class="bg-slate-900">Fred 2</option>
-                                <option value="Matt" class="bg-slate-900">Matt</option>
-                                <option value="Jack" class="bg-slate-900">Jack</option>
-                                <option value="Summers" class="bg-slate-900">Summers</option>
-                                <option value="Miller" class="bg-slate-900">Miller</option>
-                                <option value="Haydo" class="bg-slate-900">Haydo</option>
-                                <option value="Luke" class="bg-slate-900">Luke</option>
-                                <option value="Gubbo" class="bg-slate-900">Gubbo</option>
-                                <option value="PK" class="bg-slate-900">PK</option>
-                            </select>
+                            <select id="r2_sel1" name="r2_sel1" required class="selection-dropdown w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500">
+    <option value="" data-cost="0" class="bg-slate-900 text-slate-400">Select Option</option>
+    
+    <!-- 3 Stars -->
+    <option value="Dan S" data-cost="3" class="bg-slate-900">Dan S (⭐⭐⭐)</option>
+    <option value="PK" data-cost="3" class="bg-slate-900">PK (⭐⭐⭐)</option>
+    <option value="Gubbo" data-cost="3" class="bg-slate-900">Gubbo (⭐⭐⭐)</option>
+    <option value="Luke" data-cost="3" class="bg-slate-900">Luke (⭐⭐⭐)</option>
+
+    <!-- 2 Stars -->
+    <option value="Fred O" data-cost="2" class="bg-slate-900">Fred O (⭐⭐)</option>
+    <option value="Fred 2" data-cost="2" class="bg-slate-900">Fred 2 (⭐⭐)</option>
+    <option value="Summers" data-cost="2" class="bg-slate-900">Summers (⭐⭐)</option>
+    <option value="Haydo" data-cost="2" class="bg-slate-900">Haydo (⭐⭐)</option>
+
+    <!-- 1 Star -->
+    <option value="Jack" data-cost="1" class="bg-slate-900">Jack (⭐)</option>
+    <option value="Miller" data-cost="1" class="bg-slate-900">Miller (⭐)</option>
+    <option value="Matt" data-cost="1" class="bg-slate-900">Matt (⭐)</option>
+    <option value="Dan W" data-cost="1" class="bg-slate-900">Dan W (⭐)</option>
+</select>
                         </div>
                         <div>
                             <label for="r2_sel2" class="block text-sm font-medium text-slate-300 mb-1.5">
                                 Selection 2 <span class="text-rose-400">*</span>
                             </label>
-                            <select id="r2_sel2" name="r2_sel2" required class="w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500">
-                                <option value="" class="bg-slate-900 text-slate-400">Select Option</option>
-                                <option value="Dan S" class="bg-slate-900">Dan S</option>
-                                <option value="Dan W" class="bg-slate-900">Dan W</option>
-                                <option value="Fred O" class="bg-slate-900">Fred O</option>                           
-                                <option value="Fred 2" class="bg-slate-900">Fred 2</option>
-                                <option value="Matt" class="bg-slate-900">Matt</option>
-                                <option value="Jack" class="bg-slate-900">Jack</option>
-                                <option value="Summers" class="bg-slate-900">Summers</option>
-                                <option value="Miller" class="bg-slate-900">Miller</option>
-                                <option value="Haydo" class="bg-slate-900">Haydo</option>
-                                <option value="Luke" class="bg-slate-900">Luke</option>
-                                <option value="Gubbo" class="bg-slate-900">Gubbo</option>
-                                <option value="PK" class="bg-slate-900">PK</option>
-                            </select>
+                            <select id="r2_sel2" name="r2_sel2" required class="selection-dropdown w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500">
+    <option value="" data-cost="0" class="bg-slate-900 text-slate-400">Select Option</option>
+    
+    <!-- 3 Stars -->
+    <option value="Dan S" data-cost="3" class="bg-slate-900">Dan S (⭐⭐⭐)</option>
+    <option value="PK" data-cost="3" class="bg-slate-900">PK (⭐⭐⭐)</option>
+    <option value="Gubbo" data-cost="3" class="bg-slate-900">Gubbo (⭐⭐⭐)</option>
+    <option value="Luke" data-cost="3" class="bg-slate-900">Luke (⭐⭐⭐)</option>
+
+    <!-- 2 Stars -->
+    <option value="Fred O" data-cost="2" class="bg-slate-900">Fred O (⭐⭐)</option>
+    <option value="Fred 2" data-cost="2" class="bg-slate-900">Fred 2 (⭐⭐)</option>
+    <option value="Summers" data-cost="2" class="bg-slate-900">Summers (⭐⭐)</option>
+    <option value="Haydo" data-cost="2" class="bg-slate-900">Haydo (⭐⭐)</option>
+
+    <!-- 1 Star -->
+    <option value="Jack" data-cost="1" class="bg-slate-900">Jack (⭐)</option>
+    <option value="Miller" data-cost="1" class="bg-slate-900">Miller (⭐)</option>
+    <option value="Matt" data-cost="1" class="bg-slate-900">Matt (⭐)</option>
+    <option value="Dan W" data-cost="1" class="bg-slate-900">Dan W (⭐)</option>
+</select>
                         </div>
                     </div>
                 </div>
@@ -231,41 +265,53 @@
                             <label for="r3_sel1" class="block text-sm font-medium text-slate-300 mb-1.5">
                                 Selection 1 <span class="text-rose-400">*</span>
                             </label>
-                            <select id="r3_sel1" name="r3_sel1" required class="w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500">
-                                <option value="" class="bg-slate-900 text-slate-400">Select Option</option>
-                                <option value="Dan S" class="bg-slate-900">Dan S</option>
-                                <option value="Dan W" class="bg-slate-900">Dan W</option>
-                                <option value="Fred O" class="bg-slate-900">Fred O</option>                           
-                                <option value="Fred 2" class="bg-slate-900">Fred 2</option>
-                                <option value="Matt" class="bg-slate-900">Matt</option>
-                                <option value="Jack" class="bg-slate-900">Jack</option>
-                                <option value="Summers" class="bg-slate-900">Summers</option>
-                                <option value="Miller" class="bg-slate-900">Miller</option>
-                                <option value="Haydo" class="bg-slate-900">Haydo</option>
-                                <option value="Luke" class="bg-slate-900">Luke</option>
-                                <option value="Gubbo" class="bg-slate-900">Gubbo</option>
-                                <option value="PK" class="bg-slate-900">PK</option>
-                            </select>
+                            <select id="r3_sel1" name="r3_sel1" required class="selection-dropdown w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500">
+    <option value="" data-cost="0" class="bg-slate-900 text-slate-400">Select Option</option>
+    
+    <!-- 3 Stars -->
+    <option value="Dan S" data-cost="3" class="bg-slate-900">Dan S (⭐⭐⭐)</option>
+    <option value="PK" data-cost="3" class="bg-slate-900">PK (⭐⭐⭐)</option>
+    <option value="Gubbo" data-cost="3" class="bg-slate-900">Gubbo (⭐⭐⭐)</option>
+    <option value="Luke" data-cost="3" class="bg-slate-900">Luke (⭐⭐⭐)</option>
+
+    <!-- 2 Stars -->
+    <option value="Fred O" data-cost="2" class="bg-slate-900">Fred O (⭐⭐)</option>
+    <option value="Fred 2" data-cost="2" class="bg-slate-900">Fred 2 (⭐⭐)</option>
+    <option value="Summers" data-cost="2" class="bg-slate-900">Summers (⭐⭐)</option>
+    <option value="Haydo" data-cost="2" class="bg-slate-900">Haydo (⭐⭐)</option>
+
+    <!-- 1 Star -->
+    <option value="Jack" data-cost="1" class="bg-slate-900">Jack (⭐)</option>
+    <option value="Miller" data-cost="1" class="bg-slate-900">Miller (⭐)</option>
+    <option value="Matt" data-cost="1" class="bg-slate-900">Matt (⭐)</option>
+    <option value="Dan W" data-cost="1" class="bg-slate-900">Dan W (⭐)</option>
+</select>
                         </div>
                         <div>
                             <label for="r3_sel2" class="block text-sm font-medium text-slate-300 mb-1.5">
                                 Selection 2 <span class="text-rose-400">*</span>
                             </label>
-                            <select id="r3_sel2" name="r3_sel2" required class="w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500">
-                                <option value="" class="bg-slate-900 text-slate-400">Select Option</option>
-                                <option value="Dan S" class="bg-slate-900">Dan S</option>
-                                <option value="Dan W" class="bg-slate-900">Dan W</option>
-                                <option value="Fred O" class="bg-slate-900">Fred O</option>                           
-                                <option value="Fred 2" class="bg-slate-900">Fred 2</option>
-                                <option value="Matt" class="bg-slate-900">Matt</option>
-                                <option value="Jack" class="bg-slate-900">Jack</option>
-                                <option value="Summers" class="bg-slate-900">Summers</option>
-                                <option value="Miller" class="bg-slate-900">Miller</option>
-                                <option value="Haydo" class="bg-slate-900">Haydo</option>
-                                <option value="Luke" class="bg-slate-900">Luke</option>
-                                <option value="Gubbo" class="bg-slate-900">Gubbo</option>
-                                <option value="PK" class="bg-slate-900">PK</option>
-                            </select>
+                            <select id="r3_sel2" name="r3_sel2" required class="selection-dropdown w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500">
+    <option value="" data-cost="0" class="bg-slate-900 text-slate-400">Select Option</option>
+    
+    <!-- 3 Stars -->
+    <option value="Dan S" data-cost="3" class="bg-slate-900">Dan S (⭐⭐⭐)</option>
+    <option value="PK" data-cost="3" class="bg-slate-900">PK (⭐⭐⭐)</option>
+    <option value="Gubbo" data-cost="3" class="bg-slate-900">Gubbo (⭐⭐⭐)</option>
+    <option value="Luke" data-cost="3" class="bg-slate-900">Luke (⭐⭐⭐)</option>
+
+    <!-- 2 Stars -->
+    <option value="Fred O" data-cost="2" class="bg-slate-900">Fred O (⭐⭐)</option>
+    <option value="Fred 2" data-cost="2" class="bg-slate-900">Fred 2 (⭐⭐)</option>
+    <option value="Summers" data-cost="2" class="bg-slate-900">Summers (⭐⭐)</option>
+    <option value="Haydo" data-cost="2" class="bg-slate-900">Haydo (⭐⭐)</option>
+
+    <!-- 1 Star -->
+    <option value="Jack" data-cost="1" class="bg-slate-900">Jack (⭐)</option>
+    <option value="Miller" data-cost="1" class="bg-slate-900">Miller (⭐)</option>
+    <option value="Matt" data-cost="1" class="bg-slate-900">Matt (⭐)</option>
+    <option value="Dan W" data-cost="1" class="bg-slate-900">Dan W (⭐)</option>
+</select>
                         </div>
                     </div>
                 </div>
@@ -293,24 +339,81 @@
     </main>
 
     <script>
-    // HARDCODE YOUR DEPLOYED URL HERE
+    // DEPLOYED GOOGLE APPS SCRIPT URL
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzPru9sZJmvtLlWxb-KWmwejUyWYEZ8A2sITdRyMYCRpbjNX-bPFIzt8beCo9KkDhBekg/exec";
+    const MAX_BUDGET = 12;
 
-    // Form elements
+    // Form & UI Elements
     const form = document.getElementById('selectionForm');
     const submitBtn = document.getElementById('submitBtn');
     const btnText = document.getElementById('btnText');
     const btnSpinner = document.getElementById('btnSpinner');
     const statusBox = document.getElementById('statusBox');
 
+    // Budget Tracker UI Elements
+    const dropdowns = document.querySelectorAll('.selection-dropdown');
+    const spentDisplay = document.getElementById('spentDisplay');
+    const remainingDisplay = document.getElementById('remainingDisplay');
+    const budgetBadge = document.getElementById('budgetBadge');
+
+    // Calculate total stars selected across all dropdowns
+    function calculateTotalCost() {
+        let total = 0;
+        dropdowns.forEach(select => {
+            const selectedOption = select.options[select.selectedIndex];
+            if (selectedOption) {
+                const cost = parseInt(selectedOption.getAttribute('data-cost')) || 0;
+                total += cost;
+            }
+        });
+        return total;
+    }
+
+    // Update live star budget UI and disable button if over limit
+    function updateBudgetTracker() {
+        const totalSpent = calculateTotalCost();
+        const remaining = MAX_BUDGET - totalSpent;
+
+        if (spentDisplay) spentDisplay.textContent = totalSpent;
+
+        if (totalSpent > MAX_BUDGET) {
+            // Over Budget State
+            if (budgetBadge) {
+                budgetBadge.textContent = `${Math.abs(remaining)} ⭐ Over Budget`;
+                budgetBadge.className = "px-3.5 py-1.5 rounded-lg text-sm font-bold bg-rose-500/10 border border-rose-500/30 text-rose-400";
+            }
+            submitBtn.disabled = true;
+        } else {
+            // Valid State
+            if (budgetBadge) {
+                budgetBadge.innerHTML = `<span id="remainingDisplay">${remaining}</span> ⭐ Remaining`;
+                budgetBadge.className = "px-3.5 py-1.5 rounded-lg text-sm font-bold bg-emerald-500/10 border border-emerald-500/30 text-emerald-400";
+            }
+            submitBtn.disabled = false;
+        }
+    }
+
+    // Listen for dropdown changes to update budget in real-time
+    dropdowns.forEach(select => {
+        select.addEventListener('change', updateBudgetTracker);
+    });
+
+    // Handle Form Submission
     form.addEventListener('submit', function(e) {
         e.preventDefault();
+
+        // Safety check before sending data
+        const totalSpent = calculateTotalCost();
+        if (totalSpent > MAX_BUDGET) {
+            showStatus(`Star limit exceeded! You used ${totalSpent} stars out of ${MAX_BUDGET}.`, 'error');
+            return;
+        }
 
         // Set Loading UI State
         setLoading(true);
         hideStatus();
 
-        // Build payload matching Google Apps Script structure
+        // Payload for Google Apps Script
         const payload = {
             name: document.getElementById('name').value,
             r1_sel1: document.getElementById('r1_sel1').value,
@@ -318,13 +421,14 @@
             r2_sel1: document.getElementById('r2_sel1').value,
             r2_sel2: document.getElementById('r2_sel2').value,
             r3_sel1: document.getElementById('r3_sel1').value,
-            r3_sel2: document.getElementById('r3_sel2').value
+            r3_sel2: document.getElementById('r3_sel2').value,
+            total_stars_used: totalSpent
         };
 
         // Post request to Google Apps Script
         fetch(SCRIPT_URL, {
             method: 'POST',
-            mode: 'no-cors', // Bypasses strict CORS issues for Google Web Apps
+            mode: 'no-cors',
             headers: {
                 'Content-Type': 'text/plain'
             },
@@ -333,6 +437,7 @@
         .then(() => {
             showStatus('Success! Your selections have been saved.', 'success');
             form.reset();
+            updateBudgetTracker(); // Reset star counter back to 12
         })
         .catch(err => {
             console.error('Submission error:', err);
