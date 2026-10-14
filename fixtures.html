@@ -7,9 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
+        body { font-family: 'Inter', sans-serif; }
     </style>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-emerald-500 selection:text-slate-900">
@@ -21,7 +19,6 @@
                 <!-- App Brand / Logo -->
                 <div class="flex items-center space-x-3">
                     <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-emerald-400 flex items-center justify-center text-slate-950 font-black shadow-lg shadow-emerald-900/40">
-                        <!-- Golf Flag Icon -->
                         <svg class="w-5 h-5 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm0 0h18" />
                         </svg>
@@ -52,351 +49,80 @@
     </header>
 
     <!-- Main Content Container -->
-    <main class="flex-grow py-10 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-4xl mx-auto space-y-10">
+    <main class="flex-grow py-8 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto space-y-8">
             
             <!-- Page Header -->
-            <div class="text-center space-y-3">
+            <div class="text-center space-y-2">
                 <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
                     <span>Match Day Schedule</span>
                 </div>
-                <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                    Order of Play
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                    Order of Play & Matchups
                 </h1>
-                <p class="text-slate-400 max-w-lg mx-auto text-sm sm:text-base">
-                    Ryder Cup format: Team USA (Red) vs Team Europe (Blue) across Four-Ball and Scramble sessions.
+                <p class="text-slate-400 max-w-lg mx-auto text-xs sm:text-sm">
+                    Team USA <span class="text-rose-400 font-bold">(Red)</span> vs Team Europe <span class="text-sky-400 font-bold">(Blue)</span>
                 </p>
             </div>
 
-            <!-- Team Header Summary Banner -->
-            <div class="grid grid-cols-2 gap-4 bg-slate-800/40 p-4 rounded-2xl border border-slate-700/60 text-center">
-                <div class="p-3 bg-rose-950/40 border border-rose-500/30 rounded-xl flex items-center justify-center space-x-3">
-                    <span class="w-3 h-3 rounded-full bg-rose-500 animate-pulse"></span>
-                    <span class="font-bold text-rose-400 text-sm sm:text-base">TEAM USA</span>
+            <!-- Team Header Banner -->
+            <div class="grid grid-cols-2 gap-3 bg-slate-800/40 p-3 rounded-xl border border-slate-700/60 text-center max-w-xl mx-auto">
+                <div class="py-2 px-3 bg-rose-950/40 border border-rose-500/30 rounded-lg flex items-center justify-center space-x-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+                    <span class="font-bold text-rose-400 text-xs sm:text-sm">TEAM USA</span>
                 </div>
-                <div class="p-3 bg-sky-950/40 border border-sky-500/30 rounded-xl flex items-center justify-center space-x-3">
-                    <span class="font-bold text-sky-400 text-sm sm:text-base">TEAM EUROPE</span>
-                    <span class="w-3 h-3 rounded-full bg-sky-500 animate-pulse"></span>
+                <div class="py-2 px-3 bg-sky-950/40 border border-sky-500/30 rounded-xl flex items-center justify-center space-x-2">
+                    <span class="font-bold text-sky-400 text-xs sm:text-sm">TEAM EUROPE</span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span>
                 </div>
             </div>
 
-            <!-- SECTION 1: FOUR-BALL -->
-            <section class="space-y-4">
-                <div class="flex items-center justify-between border-b border-slate-700/80 pb-3">
-                    <div class="flex items-center space-x-3">
-                        <div class="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                        </div>
-                        <div>
-                            <h2 class="text-xl font-bold text-white">Session 1: Four-Ball (2v2)</h2>
-                            <p class="text-xs text-slate-400">Each golfer plays their own ball; lowest score on hole counts for team</p>
-                        </div>
+            <!-- SESSION 1: FOUR-BALL -->
+            <section class="space-y-3">
+                <div class="flex items-center space-x-2 border-b border-slate-700/80 pb-2">
+                    <div class="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-base font-bold text-white">Session 1: Four-Ball (2v2)</h2>
                     </div>
                 </div>
 
-                <!-- Four-Ball Match Cards -->
-                <div class="space-y-4">
-
-                    <!-- Four-Ball Match 1 -->
-                    <div class="bg-slate-800/60 backdrop-blur-sm border border-slate-700/60 rounded-2xl overflow-hidden shadow-xl">
-                        <div class="bg-slate-800 px-4 py-2 border-b border-slate-700/60 flex items-center justify-between text-xs font-semibold text-slate-400">
-                            <span class="uppercase tracking-wider">Group 1 • Tee Time: 08:00 AM</span>
-                            <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2.5 py-0.5 rounded-full">Four-Ball</span>
+                <!-- 3 Groups Side-by-Side Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    
+                    <!-- Group 1 -->
+                    <div class="bg-slate-800/60 backdrop-blur-sm border border-slate-700/60 rounded-xl overflow-hidden shadow-lg flex flex-col justify-between">
+                        <div class="bg-slate-800/90 px-3 py-1.5 border-b border-slate-700/60 flex items-center justify-between text-xs font-semibold">
+                            <span class="text-slate-300">Group 1 • 08:00 AM</span>
+                            <span class="text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded text-[10px] border border-emerald-500/20">Four-Ball</span>
                         </div>
-                        <div class="grid grid-cols-1 md:grid-cols-11 divide-y md:divide-y-0 md:divide-x divide-slate-700/60">
-                            <!-- Team USA (Red) -->
-                            <div class="md:col-span-5 p-4 bg-rose-950/20 space-y-2">
-                                <div class="text-xs font-bold text-rose-400 uppercase tracking-wider flex items-center space-x-1">
-                                    <span>USA Pair</span>
-                                </div>
-                                <div class="space-y-1.5 text-sm font-semibold text-slate-100">
-                                    <div class="flex items-center justify-between bg-slate-900/60 p-2 rounded-lg border border-rose-500/20">
-                                        <span>Scottie Scheffler</span>
-                                        <span class="text-xs text-rose-400 font-mono">(2.1)</span>
-                                    </div>
-                                    <div class="flex items-center justify-between bg-slate-900/60 p-2 rounded-lg border border-rose-500/20">
-                                        <span>Xander Schauffele</span>
-                                        <span class="text-xs text-rose-400 font-mono">(3.4)</span>
-                                    </div>
+                        <div class="p-3 space-y-2">
+                            <!-- Team USA -->
+                            <div class="p-2.5 bg-rose-950/30 border border-rose-500/20 rounded-lg">
+                                <div class="text-[10px] font-bold text-rose-400 uppercase tracking-wider mb-1">USA</div>
+                                <div class="text-xs font-semibold text-slate-100 truncate">
+                                    S. Scheffler <span class="text-[11px] text-rose-400 font-mono">(2.1)</span> & X. Schauffele <span class="text-[11px] text-rose-400 font-mono">(3.4)</span>
                                 </div>
                             </div>
-
-                            <!-- VS Divider Badge -->
-                            <div class="md:col-span-1 p-2 flex items-center justify-center bg-slate-800/40">
-                                <span class="font-extrabold text-xs text-slate-400 bg-slate-900 px-2.5 py-1 rounded-full border border-slate-700">VS</span>
-                            </div>
-
-                            <!-- Team Europe (Blue) -->
-                            <div class="md:col-span-5 p-4 bg-sky-950/20 space-y-2">
-                                <div class="text-xs font-bold text-sky-400 uppercase tracking-wider flex items-center justify-end space-x-1">
-                                    <span>Europe Pair</span>
-                                </div>
-                                <div class="space-y-1.5 text-sm font-semibold text-slate-100">
-                                    <div class="flex items-center justify-between bg-slate-900/60 p-2 rounded-lg border border-sky-500/20">
-                                        <span>Rory McIlroy</span>
-                                        <span class="text-xs text-sky-400 font-mono">(1.8)</span>
-                                    </div>
-                                    <div class="flex items-center justify-between bg-slate-900/60 p-2 rounded-lg border border-sky-500/20">
-                                        <span>Jon Rahm</span>
-                                        <span class="text-xs text-sky-400 font-mono">(2.5)</span>
-                                    </div>
+                            <div class="text-center text-[10px] font-extrabold text-slate-500 uppercase tracking-widest">VS</div>
+                            <!-- Team Europe -->
+                            <div class="p-2.5 bg-sky-950/30 border border-sky-500/20 rounded-lg">
+                                <div class="text-[10px] font-bold text-sky-400 uppercase tracking-wider mb-1">Europe</div>
+                                <div class="text-xs font-semibold text-slate-100 truncate">
+                                    R. McIlroy <span class="text-[11px] text-sky-400 font-mono">(1.8)</span> & J. Rahm <span class="text-[11px] text-sky-400 font-mono">(2.5)</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Four-Ball Match 2 -->
-                    <div class="bg-slate-800/60 backdrop-blur-sm border border-slate-700/60 rounded-2xl overflow-hidden shadow-xl">
-                        <div class="bg-slate-800 px-4 py-2 border-b border-slate-700/60 flex items-center justify-between text-xs font-semibold text-slate-400">
-                            <span class="uppercase tracking-wider">Group 2 • Tee Time: 08:12 AM</span>
-                            <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2.5 py-0.5 rounded-full">Four-Ball</span>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-11 divide-y md:divide-y-0 md:divide-x divide-slate-700/60">
-                            <!-- Team USA (Red) -->
-                            <div class="md:col-span-5 p-4 bg-rose-950/20 space-y-2">
-                                <div class="text-xs font-bold text-rose-400 uppercase tracking-wider">USA Pair</div>
-                                <div class="space-y-1.5 text-sm font-semibold text-slate-100">
-                                    <div class="flex items-center justify-between bg-slate-900/60 p-2 rounded-lg border border-rose-500/20">
-                                        <span>Collin Morikawa</span>
-                                        <span class="text-xs text-rose-400 font-mono">(3.8)</span>
-                                    </div>
-                                    <div class="flex items-center justify-between bg-slate-900/60 p-2 rounded-lg border border-rose-500/20">
-                                        <span>Patrick Cantlay</span>
-                                        <span class="text-xs text-rose-400 font-mono">(4.2)</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- VS Divider -->
-                            <div class="md:col-span-1 p-2 flex items-center justify-center bg-slate-800/40">
-                                <span class="font-extrabold text-xs text-slate-400 bg-slate-900 px-2.5 py-1 rounded-full border border-slate-700">VS</span>
-                            </div>
-
-                            <!-- Team Europe (Blue) -->
-                            <div class="md:col-span-5 p-4 bg-sky-950/20 space-y-2">
-                                <div class="text-xs font-bold text-sky-400 uppercase tracking-wider text-right">Europe Pair</div>
-                                <div class="space-y-1.5 text-sm font-semibold text-slate-100">
-                                    <div class="flex items-center justify-between bg-slate-900/60 p-2 rounded-lg border border-sky-500/20">
-                                        <span>Viktor Hovland</span>
-                                        <span class="text-xs text-sky-400 font-mono">(2.9)</span>
-                                    </div>
-                                    <div class="flex items-center justify-between bg-slate-900/60 p-2 rounded-lg border border-sky-500/20">
-                                        <span>Ludvig Åberg</span>
-                                        <span class="text-xs text-sky-400 font-mono">(3.1)</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Four-Ball Match 3 -->
-                    <div class="bg-slate-800/60 backdrop-blur-sm border border-slate-700/60 rounded-2xl overflow-hidden shadow-xl">
-                        <div class="bg-slate-800 px-4 py-2 border-b border-slate-700/60 flex items-center justify-between text-xs font-semibold text-slate-400">
-                            <span class="uppercase tracking-wider">Group 3 • Tee Time: 08:24 AM</span>
-                            <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2.5 py-0.5 rounded-full">Four-Ball</span>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-11 divide-y md:divide-y-0 md:divide-x divide-slate-700/60">
-                            <!-- Team USA (Red) -->
-                            <div class="md:col-span-5 p-4 bg-rose-950/20 space-y-2">
-                                <div class="text-xs font-bold text-rose-400 uppercase tracking-wider">USA Pair</div>
-                                <div class="space-y-1.5 text-sm font-semibold text-slate-100">
-                                    <div class="flex items-center justify-between bg-slate-900/60 p-2 rounded-lg border border-rose-500/20">
-                                        <span>Wyndham Clark</span>
-                                        <span class="text-xs text-rose-400 font-mono">(4.0)</span>
-                                    </div>
-                                    <div class="flex items-center justify-between bg-slate-900/60 p-2 rounded-lg border border-rose-500/20">
-                                        <span>Max Homa</span>
-                                        <span class="text-xs text-rose-400 font-mono">(5.5)</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- VS Divider -->
-                            <div class="md:col-span-1 p-2 flex items-center justify-center bg-slate-800/40">
-                                <span class="font-extrabold text-xs text-slate-400 bg-slate-900 px-2.5 py-1 rounded-full border border-slate-700">VS</span>
-                            </div>
-
-                            <!-- Team Europe (Blue) -->
-                            <div class="md:col-span-5 p-4 bg-sky-950/20 space-y-2">
-                                <div class="text-xs font-bold text-sky-400 uppercase tracking-wider text-right">Europe Pair</div>
-                                <div class="space-y-1.5 text-sm font-semibold text-slate-100">
-                                    <div class="flex items-center justify-between bg-slate-900/60 p-2 rounded-lg border border-sky-500/20">
-                                        <span>Tommy Fleetwood</span>
-                                        <span class="text-xs text-sky-400 font-mono">(4.0)</span>
-                                    </div>
-                                    <div class="flex items-center justify-between bg-slate-900/60 p-2 rounded-lg border border-sky-500/20">
-                                        <span>Shane Lowry</span>
-                                        <span class="text-xs text-sky-400 font-mono">(5.8)</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-
-            <!-- SECTION 2: SCRAMBLE -->
-            <section class="space-y-4 pt-4">
-                <div class="flex items-center justify-between border-b border-slate-700/80 pb-3">
-                    <div class="flex items-center space-x-3">
-                        <div class="p-2 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                            </svg>
-                        </div>
-                        <div>
-                            <h2 class="text-xl font-bold text-white">Session 2: Scramble (2v2)</h2>
-                            <p class="text-xs text-slate-400">Both players tee off, best shot chosen, played continuously until holed</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Scramble Match Cards -->
-                <div class="space-y-4">
-
-                    <!-- Scramble Match 1 -->
-                    <div class="bg-slate-800/60 backdrop-blur-sm border border-slate-700/60 rounded-2xl overflow-hidden shadow-xl">
-                        <div class="bg-slate-800 px-4 py-2 border-b border-slate-700/60 flex items-center justify-between text-xs font-semibold text-slate-400">
-                            <span class="uppercase tracking-wider">Group 4 • Tee Time: 01:30 PM</span>
-                            <span class="bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2.5 py-0.5 rounded-full">Scramble</span>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-11 divide-y md:divide-y-0 md:divide-x divide-slate-700/60">
-                            <!-- Team USA (Red) -->
-                            <div class="md:col-span-5 p-4 bg-rose-950/20 space-y-2">
-                                <div class="text-xs font-bold text-rose-400 uppercase tracking-wider">USA Pair</div>
-                                <div class="space-y-1.5 text-sm font-semibold text-slate-100">
-                                    <div class="flex items-center justify-between bg-slate-900/60 p-2 rounded-lg border border-rose-500/20">
-                                        <span>Brooks Koepka</span>
-                                        <span class="text-xs text-rose-400 font-mono">(4.5)</span>
-                                    </div>
-                                    <div class="flex items-center justify-between bg-slate-900/60 p-2 rounded-lg border border-rose-500/20">
-                                        <span>Jordan Spieth</span>
-                                        <span class="text-xs text-rose-400 font-mono">(5.1)</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- VS Divider -->
-                            <div class="md:col-span-1 p-2 flex items-center justify-center bg-slate-800/40">
-                                <span class="font-extrabold text-xs text-slate-400 bg-slate-900 px-2.5 py-1 rounded-full border border-slate-700">VS</span>
-                            </div>
-
-                            <!-- Team Europe (Blue) -->
-                            <div class="md:col-span-5 p-4 bg-sky-950/20 space-y-2">
-                                <div class="text-xs font-bold text-sky-400 uppercase tracking-wider text-right">Europe Pair</div>
-                                <div class="space-y-1.5 text-sm font-semibold text-slate-100">
-                                    <div class="flex items-center justify-between bg-slate-900/60 p-2 rounded-lg border border-sky-500/20">
-                                        <span>Matt Fitzpatrick</span>
-                                        <span class="text-xs text-sky-400 font-mono">(4.3)</span>
-                                    </div>
-                                    <div class="flex items-center justify-between bg-slate-900/60 p-2 rounded-lg border border-sky-500/20">
-                                        <span>Tyrrell Hatton</span>
-                                        <span class="text-xs text-sky-400 font-mono">(3.9)</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Scramble Match 2 -->
-                    <div class="bg-slate-800/60 backdrop-blur-sm border border-slate-700/60 rounded-2xl overflow-hidden shadow-xl">
-                        <div class="bg-slate-800 px-4 py-2 border-b border-slate-700/60 flex items-center justify-between text-xs font-semibold text-slate-400">
-                            <span class="uppercase tracking-wider">Group 5 • Tee Time: 01:42 PM</span>
-                            <span class="bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2.5 py-0.5 rounded-full">Scramble</span>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-11 divide-y md:divide-y-0 md:divide-x divide-slate-700/60">
-                            <!-- Team USA (Red) -->
-                            <div class="md:col-span-5 p-4 bg-rose-950/20 space-y-2">
-                                <div class="text-xs font-bold text-rose-400 uppercase tracking-wider">USA Pair</div>
-                                <div class="space-y-1.5 text-sm font-semibold text-slate-100">
-                                    <div class="flex items-center justify-between bg-slate-900/60 p-2 rounded-lg border border-rose-500/20">
-                                        <span>Justin Thomas</span>
-                                        <span class="text-xs text-rose-400 font-mono">(4.8)</span>
-                                    </div>
-                                    <div class="flex items-center justify-between bg-slate-900/60 p-2 rounded-lg border border-rose-500/20">
-                                        <span>Sam Burns</span>
-                                        <span class="text-xs text-rose-400 font-mono">(5.3)</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- VS Divider -->
-                            <div class="md:col-span-1 p-2 flex items-center justify-center bg-slate-800/40">
-                                <span class="font-extrabold text-xs text-slate-400 bg-slate-900 px-2.5 py-1 rounded-full border border-slate-700">VS</span>
-                            </div>
-
-                            <!-- Team Europe (Blue) -->
-                            <div class="md:col-span-5 p-4 bg-sky-950/20 space-y-2">
-                                <div class="text-xs font-bold text-sky-400 uppercase tracking-wider text-right">Europe Pair</div>
-                                <div class="space-y-1.5 text-sm font-semibold text-slate-100">
-                                    <div class="flex items-center justify-between bg-slate-900/60 p-2 rounded-lg border border-sky-500/20">
-                                        <span>Sepp Straka</span>
-                                        <span class="text-xs text-sky-400 font-mono">(6.1)</span>
-                                    </div>
-                                    <div class="flex items-center justify-between bg-slate-900/60 p-2 rounded-lg border border-sky-500/20">
-                                        <span>Nicolai Højgaard</span>
-                                        <span class="text-xs text-sky-400 font-mono">(5.7)</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Scramble Match 3 -->
-                    <div class="bg-slate-800/60 backdrop-blur-sm border border-slate-700/60 rounded-2xl overflow-hidden shadow-xl">
-                        <div class="bg-slate-800 px-4 py-2 border-b border-slate-700/60 flex items-center justify-between text-xs font-semibold text-slate-400">
-                            <span class="uppercase tracking-wider">Group 6 • Tee Time: 01:54 PM</span>
-                            <span class="bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2.5 py-0.5 rounded-full">Scramble</span>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-11 divide-y md:divide-y-0 md:divide-x divide-slate-700/60">
-                            <!-- Team USA (Red) -->
-                            <div class="md:col-span-5 p-4 bg-rose-950/20 space-y-2">
-                                <div class="text-xs font-bold text-rose-400 uppercase tracking-wider">USA Pair</div>
-                                <div class="space-y-1.5 text-sm font-semibold text-slate-100">
-                                    <div class="flex items-center justify-between bg-slate-900/60 p-2 rounded-lg border border-rose-500/20">
-                                        <span>Brian Harman</span>
-                                        <span class="text-xs text-rose-400 font-mono">(4.9)</span>
-                                    </div>
-                                    <div class="flex items-center justify-between bg-slate-900/60 p-2 rounded-lg border border-rose-500/20">
-                                        <span>Rickie Fowler</span>
-                                        <span class="text-xs text-rose-400 font-mono">(5.8)</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- VS Divider -->
-                            <div class="md:col-span-1 p-2 flex items-center justify-center bg-slate-800/40">
-                                <span class="font-extrabold text-xs text-slate-400 bg-slate-900 px-2.5 py-1 rounded-full border border-slate-700">VS</span>
-                            </div>
-
-                            <!-- Team Europe (Blue) -->
-                            <div class="md:col-span-5 p-4 bg-sky-950/20 space-y-2">
-                                <div class="text-xs font-bold text-sky-400 uppercase tracking-wider text-right">Europe Pair</div>
-                                <div class="space-y-1.5 text-sm font-semibold text-slate-100">
-                                    <div class="flex items-center justify-between bg-slate-900/60 p-2 rounded-lg border border-sky-500/20">
-                                        <span>Justin Rose</span>
-                                        <span class="text-xs text-sky-400 font-mono">(4.6)</span>
-                                    </div>
-                                    <div class="flex items-center justify-between bg-slate-900/60 p-2 rounded-lg border border-sky-500/20">
-                                        <span>Robert MacIntyre</span>
-                                        <span class="text-xs text-sky-400 font-mono">(5.2)</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-
-        </div>
-    </main>
-
-</body>
-</html>
+                    <!-- Group 2 -->
+                    <div class="bg-slate-800/60 backdrop-blur-sm border border-slate-700/60 rounded-xl overflow-hidden shadow-lg flex flex-col justify-between">
+                        <div class="bg-slate-800/90 px-3 py-1.5 border-b border-slate-700/60 flex items-center justify-between text-xs font-semibold">
+                            <span class="text-slate-300">Group 2 • 08:12 AM</span>
+                            <span class
