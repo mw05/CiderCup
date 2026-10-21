@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Participant Selections - Fantasy Cider Cup</title>
+  <title>Selections - Fantasy Cider Cup</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     #tableHeader th {
@@ -34,7 +34,7 @@
 
           <!-- Navigation Links -->
           <nav class="flex items-center space-x-1 sm:space-x-2 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
-            <a href="index.html" class="px-3.5 py-2 rounded-lg text-sm font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 shadow-sm flex items-center space-x-2">
+            <a href="selections.html" class="px-3.5 py-2 rounded-lg text-sm font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 shadow-sm flex items-center space-x-2">
               <span>Selections</span>
             </a>
             <a href="results.html" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
@@ -54,7 +54,7 @@
       </div>
     </header>
 
-    <!-- Entry Count & Info Bar -->
+    <!-- Entry Count Bar -->
     <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700/60 flex items-center justify-between">
       <div id="rowCount" class="text-xs text-slate-400">
         Total Participant Entries: <span id="visibleCount" class="font-bold text-emerald-400 text-sm">0</span>
@@ -83,15 +83,15 @@
   </div>
 
   <script>
-    // Google Apps Script Web App Endpoint
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzPru9sZJmvtLlWxb-KWmwejUyWYEZ8A2sITdRyMYCRpbjNX-bPFIzt8beCo9KkDhBekg/exec";
+    // Targeted directly at the "Selections" tab
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxJJEuJRZ2xui_lEFFKxX-slTN-cDVzk2ib0wx0F1YJOkIkTsSac2UxHUrlgxtHv0LyIA/exec";
 
     async function loadSelections() {
       const statusMsg = document.getElementById('statusMsg');
       const tableHeader = document.getElementById('tableHeader');
       const tableBody = document.getElementById('tableBody');
 
-      statusMsg.textContent = "Fetching selections from sheet...";
+      statusMsg.textContent = "Fetching selections from Google Sheet...";
       statusMsg.classList.remove('hidden', 'bg-red-950/50', 'text-red-300', 'border-red-800');
       statusMsg.classList.add('bg-indigo-950/50', 'text-indigo-300', 'border-indigo-800');
 
@@ -107,7 +107,7 @@
 
         if (!data || data.length === 0) {
           tableHeader.innerHTML = '';
-          tableBody.innerHTML = `<tr><td class="p-8 text-center text-slate-500">No entry records found.</td></tr>`;
+          tableBody.innerHTML = `<tr><td class="p-8 text-center text-slate-500">No entry records found in the Selections sheet.</td></tr>`;
           document.getElementById('visibleCount').textContent = 0;
           return;
         }
@@ -126,13 +126,7 @@
       const tableHeader = document.getElementById('tableHeader');
       const tableBody = document.getElementById('tableBody');
 
-      if (items.length === 0) {
-        tableBody.innerHTML = `<tr><td class="p-8 text-center text-slate-500">No records found.</td></tr>`;
-        document.getElementById('visibleCount').textContent = 0;
-        return;
-      }
-
-      // Extract column keys dynamically from the first JSON record
+      // Dynamic column keys from the JSON output
       const columns = Object.keys(items[0]);
 
       // Render Headers
@@ -146,7 +140,7 @@
         </tr>
       `;
 
-      // Helper to style specific cell values
+      // Helper to format values
       const formatCellValue = (colName, cellVal) => {
         if (!cellVal) return '<span class="text-slate-600">-</span>';
 
@@ -164,8 +158,8 @@
                   </span>`;
         }
 
-        // Standard golfer selections
-        return `<span class="text-slate-200 bg-slate-900/80 px-2 py-1 rounded border border-slate-700/80 whitespace-nowrap">${cellVal}</span>`;
+        // Round Selection Items
+        return `<span class="text-slate-200 bg-slate-900/80 px-2.5 py-1 rounded-md border border-slate-700/80 whitespace-nowrap">${cellVal}</span>`;
       };
 
       // Render Rows
@@ -181,7 +175,6 @@
       document.getElementById('visibleCount').textContent = items.length;
     }
 
-    // Auto-load on page load
     window.addEventListener('DOMContentLoaded', loadSelections);
   </script>
 
