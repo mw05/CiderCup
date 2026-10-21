@@ -83,8 +83,7 @@
   </div>
 
   <script>
-    // Targeted directly at the "Selections" tab
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxJJEuJRZ2xui_lEFFKxX-slTN-cDVzk2ib0wx0F1YJOkIkTsSac2UxHUrlgxtHv0LyIA/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzPru9sZJmvtLlWxb-KWmwejUyWYEZ8A2sITdRyMYCRpbjNX-bPFIzt8beCo9KkDhBekg/exec?tab=Selections";
 
     async function loadSelections() {
       const statusMsg = document.getElementById('statusMsg');
@@ -126,22 +125,22 @@
       const tableHeader = document.getElementById('tableHeader');
       const tableBody = document.getElementById('tableBody');
 
-      // Dynamic column keys from the JSON output
-      const columns = Object.keys(items[0]);
+      // Extract raw column keys and filter OUT the Captain column header
+      const rawColumns = Object.keys(items[0]);
+      const visibleColumns = rawColumns.filter(col => !col.toLowerCase().includes('captain'));
 
-      // Render Headers
+      // Render Headers (excluding 'Captain')
       tableHeader.innerHTML = `
         <tr>
           <th class="px-4 py-3 border-b border-slate-700 w-12 text-center text-slate-500">#</th>
-          ${columns.map(col => {
-            const isCaptain = col.toLowerCase().includes('captain');
-            return `<th class="px-4 py-3 border-b border-slate-700 whitespace-nowrap ${isCaptain ? 'text-amber-400' : ''}">${col}</th>`;
-          }).join('')}
+          ${visibleColumns.map(col => `
+            <th class="px-4 py-3 border-b border-slate-700 whitespace-nowrap">${col}</th>
+          `).join('')}
         </tr>
       `;
 
       // Helper to format values
-      const formatCellValue = (colName, cellVal) => {
+      const formatCellValue = (colName, cellVal, captainName) => {
         if (!cellVal) return '<span class="text-slate-600">-</span>';
 
         const key = colName.toLowerCase();
@@ -151,26 +150,34 @@
           return `<span class="font-bold text-white text-sm">${cellVal}</span>`;
         }
 
-        // Style Captain Column
-        if (key.includes('captain')) {
+        // Check if this selection matches the row's Captain selection
+        const isCaptainMatch = captainName && String(cellVal).trim().toLowerCase() === String(captainName).trim().toLowerCase();
+
+        if (isCaptainMatch) {
           return `<span class="inline-flex items-center space-x-1 font-bold text-amber-300 bg-amber-500/10 border border-amber-500/30 px-2.5 py-1 rounded-lg">
                     <span>👑</span> <span>${cellVal}</span>
                   </span>`;
         }
 
-        // Round Selection Items
+        // Standard golfer selection
         return `<span class="text-slate-200 bg-slate-900/80 px-2.5 py-1 rounded-md border border-slate-700/80 whitespace-nowrap">${cellVal}</span>`;
       };
 
       // Render Rows
-      tableBody.innerHTML = items.map((row, index) => `
-        <tr class="hover:bg-slate-800/60 transition-colors">
-          <td class="px-4 py-3.5 whitespace-nowrap text-center text-slate-500 font-mono text-xs">${index + 1}</td>
-          ${columns.map(col => `
-            <td class="px-4 py-3.5 whitespace-nowrap">${formatCellValue(col, row[col])}</td>
-          `).join('')}
-        </tr>
-      `).join('');
+      tableBody.innerHTML = items.map((row, index) => {
+        // Find the captain's name for this specific row
+        const captainKey = rawColumns.find(col => col.toLowerCase().includes('captain'));
+        const captainName = captainKey ? row[captainKey] : null;
+
+        return `
+          <tr class="hover:bg-slate-800/60 transition-colors">
+            <td class="px-4 py-3.5 whitespace-nowrap text-center text-slate-500 font-mono text-xs">${index + 1}</td>
+            ${visibleColumns.map(col => `
+              <td class="px-4 py-3.5 whitespace-nowrap">${formatCellValue(col, row[col], captainName)}</td>
+            `).join('')}
+          </tr>
+        `;
+      }).join('');
 
       document.getElementById('visibleCount').textContent = items.length;
     }
