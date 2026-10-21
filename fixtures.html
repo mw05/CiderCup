@@ -83,7 +83,8 @@
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzPru9sZJmvtLlWxb-KWmwejUyWYEZ8A2sITdRyMYCRpbjNX-bPFIzt8beCo9KkDhBekg/exec?tab=Selections";
+    // Updated Script URL pointing to your deployment
+    const SCRIPT_URL = "https://script.google.com/macros/library/d/1uiAe42dhFZqitFJAL7_aNK90tBBN98aMtlXeDdTPtIdYXgn9c4EThHok/7?tab=Selections";
 
     async function loadSelections() {
       const statusMsg = document.getElementById('statusMsg');
@@ -121,66 +122,76 @@
       }
     }
 
-    function renderSelectionsTable(items) {
-      const tableHeader = document.getElementById('tableHeader');
-      const tableBody = document.getElementById('tableBody');
+   function renderSelectionsTable(items) {
+  const tableHeader = document.getElementById('tableHeader');
+  const tableBody = document.getElementById('tableBody');
 
-      // Extract raw column keys and filter OUT the Captain column header
-      const rawColumns = Object.keys(items[0]);
-      const visibleColumns = rawColumns.filter(col => !col.toLowerCase().includes('captain'));
+  // Map sheet column names to custom display titles
+  const headerMap = {
+    'R1 Selection 1': 'Four Ball 1',
+    'R1 Selection 2': 'Four Ball 2',
+    'R2 Selection 1': 'Scramble 1',
+    'R2 Selection 2': 'Scramble 2',
+    'R3 Selection 1': 'Singles 1',
+    'R3 Selection 2': 'Singles 2'
+  };
 
-      // Render Headers (excluding 'Captain')
-      tableHeader.innerHTML = `
-        <tr>
-          <th class="px-4 py-3 border-b border-slate-700 w-12 text-center text-slate-500">#</th>
-          ${visibleColumns.map(col => `
-            <th class="px-4 py-3 border-b border-slate-700 whitespace-nowrap">${col}</th>
-          `).join('')}
-        </tr>
-      `;
+  // Extract raw column keys and filter OUT the Captain column header
+  const rawColumns = Object.keys(items[0]);
+  const visibleColumns = rawColumns.filter(col => !col.toLowerCase().includes('captain'));
 
-      // Helper to format values
-      const formatCellValue = (colName, cellVal, captainName) => {
-        if (!cellVal) return '<span class="text-slate-600">-</span>';
+  // Render Headers using mapped names (or fallback to original name if not in map)
+  tableHeader.innerHTML = `
+    <tr>
+      <th class="px-4 py-3 border-b border-slate-700 w-12 text-center text-slate-500">#</th>
+      ${visibleColumns.map(col => `
+        <th class="px-4 py-3 border-b border-slate-700 whitespace-nowrap">${headerMap[col] || col}</th>
+      `).join('')}
+    </tr>
+  `;
 
-        const key = colName.toLowerCase();
+  // Helper to format values
+  const formatCellValue = (colName, cellVal, captainName) => {
+    if (!cellVal) return '<span class="text-slate-600">-</span>';
 
-        // Style Participant Name
-        if (key === 'name') {
-          return `<span class="font-bold text-white text-sm">${cellVal}</span>`;
-        }
+    const key = colName.toLowerCase();
 
-        // Check if this selection matches the row's Captain selection
-        const isCaptainMatch = captainName && String(cellVal).trim().toLowerCase() === String(captainName).trim().toLowerCase();
-
-        if (isCaptainMatch) {
-          return `<span class="inline-flex items-center space-x-1 font-bold text-amber-300 bg-amber-500/10 border border-amber-500/30 px-2.5 py-1 rounded-lg">
-                    <span>👑</span> <span>${cellVal}</span>
-                  </span>`;
-        }
-
-        // Standard golfer selection
-        return `<span class="text-slate-200 bg-slate-900/80 px-2.5 py-1 rounded-md border border-slate-700/80 whitespace-nowrap">${cellVal}</span>`;
-      };
-
-      // Render Rows
-      tableBody.innerHTML = items.map((row, index) => {
-        // Find the captain's name for this specific row
-        const captainKey = rawColumns.find(col => col.toLowerCase().includes('captain'));
-        const captainName = captainKey ? row[captainKey] : null;
-
-        return `
-          <tr class="hover:bg-slate-800/60 transition-colors">
-            <td class="px-4 py-3.5 whitespace-nowrap text-center text-slate-500 font-mono text-xs">${index + 1}</td>
-            ${visibleColumns.map(col => `
-              <td class="px-4 py-3.5 whitespace-nowrap">${formatCellValue(col, row[col], captainName)}</td>
-            `).join('')}
-          </tr>
-        `;
-      }).join('');
-
-      document.getElementById('visibleCount').textContent = items.length;
+    // Style Participant Name
+    if (key === 'name') {
+      return `<span class="font-bold text-white text-sm">${cellVal}</span>`;
     }
+
+    // Check if this selection matches the row's Captain selection
+    const isCaptainMatch = captainName && String(cellVal).trim().toLowerCase() === String(captainName).trim().toLowerCase();
+
+    if (isCaptainMatch) {
+      return `<span class="inline-flex items-center space-x-1 font-bold text-amber-300 bg-amber-500/10 border border-amber-500/30 px-2.5 py-1 rounded-lg">
+                <span>👑</span> <span>${cellVal}</span>
+              </span>`;
+    }
+
+    // Standard golfer selection
+    return `<span class="text-slate-200 bg-slate-900/80 px-2.5 py-1 rounded-md border border-slate-700/80 whitespace-nowrap">${cellVal}</span>`;
+  };
+
+  // Render Rows
+  tableBody.innerHTML = items.map((row, index) => {
+    // Find the captain's name for this specific row
+    const captainKey = rawColumns.find(col => col.toLowerCase().includes('captain'));
+    const captainName = captainKey ? row[captainKey] : null;
+
+    return `
+      <tr class="hover:bg-slate-800/60 transition-colors">
+        <td class="px-4 py-3.5 whitespace-nowrap text-center text-slate-500 font-mono text-xs">${index + 1}</td>
+        ${visibleColumns.map(col => `
+          <td class="px-4 py-3.5 whitespace-nowrap">${formatCellValue(col, row[col], captainName)}</td>
+        `).join('')}
+      </tr>
+    `;
+  }).join('');
+
+  document.getElementById('visibleCount').textContent = items.length;
+}
 
     window.addEventListener('DOMContentLoaded', loadSelections);
   </script>
