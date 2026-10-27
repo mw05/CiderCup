@@ -31,16 +31,16 @@
                 <!-- Navigation Links -->
                 <nav class="flex items-center space-x-1 sm:space-x-2 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
                     <a href="index.html" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
-                        Selections
+                        My Picks
                     </a>
                     <a href="results.html" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
-                        Results
+                        Leaderboard
                     </a>
                     <a href="fixtures.html" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
-                        Matchups
+                        Entries
                     </a>
                     <a href="scores.html" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
-                        Golfer Scores
+                        Scorecards
                     </a>
                     <a href="rules.html" class="px-3.5 py-2 rounded-lg text-sm font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 shadow-sm flex items-center space-x-2">
                         <span>Rules</span>
@@ -82,7 +82,7 @@
                 </div>
 
                 <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-                    For each of the three rounds, you will select <strong class="text-white">two golfers</strong> who earn you fantasy points based on their real-world performance on the course.
+                    For each of the three rounds, you will select <strong class="text-white">two golfers</strong> who earn you fantasy points based on their actual performance on the course.
                 </p>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm pt-1">
@@ -151,7 +151,10 @@
                                 <span class="font-extrabold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20">+5 pts</span>
                             </li>
                             <li class="flex items-center justify-between">
+                                <div>
                                 <span class="text-slate-300">Hole Won</span>
+                                <span class="text-xs text-slate-500">Both golfers in team matchups</span>
+                                </div>
                                 <span class="font-extrabold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20">+1 pt</span>
                             </li>
                             <li class="flex items-center justify-between">
@@ -187,7 +190,7 @@
                                 <span class="font-extrabold text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-md border border-amber-500/20">+10 pts</span>
                             </li>
                             <li class="flex items-center justify-between">
-                                <span class="text-slate-300">Holed from Off Green</span>
+                                <span class="text-slate-300">Chip In</span>
                                 <span class="font-extrabold text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-md border border-amber-500/20">+5 pts</span>
                             </li>
                             <li class="flex items-center justify-between">
@@ -212,11 +215,12 @@
 
                         <ul class="space-y-3.5 text-sm">
                             <li class="flex items-center justify-between">
-                                <div>
-                                    <span class="text-slate-300 block">Hazard / Out of Bounds</span>
-                                    <span class="text-xs text-slate-500">Water or OB stroke</span>
-                                </div>
+                                <span class="text-slate-300 block">Water Hazard</span>
                                 <span class="font-extrabold text-rose-400 bg-rose-500/10 px-2.5 py-1 rounded-md border border-rose-500/20">-2 pts</span>
+                            </li>
+                            <li class="flex items-center justify-between">
+                                <span class="text-slate-300 block">4-putt</span>
+                                <span class="font-extrabold text-rose-400 bg-rose-500/10 px-2.5 py-1 rounded-md border border-rose-500/20">-4 pts</span>
                             </li>
                         </ul>
                     </div>

@@ -1,279 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fantasy Cider Cup - Matchups</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-    </style>
-</head>
-<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-emerald-500 selection:text-slate-900">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Selections - Fantasy Cider Cup</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    #tableHeader th {
+      padding: 0.75rem 1rem; 
+    }
 
+    #tableBody td {
+      padding: 0.75rem 1rem; 
+    }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen p-0 sm:p-8">
+
+  <div class="max-w-7xl mx-auto space-y-6">
     <!-- Shared Top Navigation Header -->
     <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between py-2.5 sm:py-0 sm:h-16 gap-2 sm:gap-0">
-                <!-- App Brand / Logo -->
-                <div class="flex items-center space-x-3">
-                    <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-emerald-400 flex items-center justify-center text-slate-950 font-black shadow-lg shadow-emerald-900/40">
-                        <svg class="w-5 h-5 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm0 0h18" />
-                        </svg>
-                    </div>
-                    <span class="font-bold text-base sm:text-lg text-white tracking-tight whitespace-nowrap">Fantasy Cider Cup</span>
-                </div>
-
-                <!-- Navigation Links -->
-                <nav class="flex items-center space-x-1 sm:space-x-2 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
-                    <a href="index.html" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
-                        Selections
-                    </a>
-                    <a href="results.html" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
-                        Results
-                    </a>
-                    <a href="fixtures.html" class="px-3.5 py-2 rounded-lg text-sm font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 shadow-sm flex items-center space-x-2">
-                        <span>Matchups</span>
-                    </a>
-                    <a href="scores.html" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
-                        Golfer Scores
-                    </a>
-                    <a href="rules.html" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
-                        Rules
-                    </a>
-                </nav>
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between py-2.5 sm:py-0 sm:h-16 gap-2 sm:gap-0">
+          <!-- App Brand / Logo -->
+          <div class="flex items-center space-x-3">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-emerald-400 flex items-center justify-center text-slate-950 font-black shadow-lg shadow-emerald-900/40">
+              <svg class="w-5 h-5 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm0 0h18" />
+              </svg>
             </div>
+            <span class="font-bold text-base sm:text-lg text-white tracking-tight whitespace-nowrap">Fantasy Cider Cup</span>
+          </div>
+
+          <!-- Navigation Links -->
+          <nav class="flex items-center space-x-1 sm:space-x-2 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
+            <a href="index.html" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
+              My Picks
+            </a>
+            <a href="results.html" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
+              Leaderboard
+            </a>
+            <a href="fixtures.html" class="px-3.5 py-2 rounded-lg text-sm font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 shadow-sm flex items-center space-x-2">
+              Entries
+            </a>
+            <a href="scores.html" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
+              Scorecards
+            </a>
+            <a href="rules.html" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
+              Rules
+            </a>
+          </nav>
         </div>
+      </div>
     </header>
 
-    <!-- Main Content Container -->
-    <main class="flex-grow py-8 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-5xl mx-auto space-y-6">
-            
-            <!-- Page Header -->
-            <div class="text-center space-y-2">
-                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                    <span>Weekend Schedule</span>
-                </div>
-                <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                    Matchups
-                </h1>
-            </div>
+    <!-- Entry Count Bar -->
+    <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700/60 flex items-center justify-between">
+      <div id="rowCount" class="text-xs text-slate-400">
+        Total Participant Entries: <span id="visibleCount" class="font-bold text-emerald-400 text-sm">0</span>
+      </div>
+    </div>
 
-            <!-- Single Top Team Indicator Banner -->
-            <div class="grid grid-cols-2 gap-3 max-w-md mx-auto text-center">
-                <div class="py-1.5 px-3 bg-rose-950/40 border border-rose-500/30 rounded-lg flex items-center justify-center space-x-2">
-                    <span class="w-2 h-2 rounded-full bg-rose-500"></span>
-                    <span class="font-bold text-rose-400 text-xs tracking-wider">TEAM USA</span>
-                </div>
-                <div class="py-1.5 px-3 bg-sky-950/40 border border-sky-500/30 rounded-lg flex items-center justify-center space-x-2">
-                    <span class="font-bold text-sky-400 text-xs tracking-wider">TEAM EUROPE</span>
-                    <span class="w-2 h-2 rounded-full bg-sky-500"></span>
-                </div>
-            </div>
+    <!-- Status Messages -->
+    <div id="statusMsg" class="p-4 rounded-lg bg-indigo-950/50 border border-indigo-800 text-indigo-300 text-sm hidden">
+      Loading participant selections...
+    </div>
 
-            <!-- ROUND 1: FOUR-BALL -->
-            <section class="space-y-3">
-                <div class="flex items-center space-x-2 border-b border-slate-700/80 pb-2">
-                    <div class="p-1 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </div>
-                    <h2 class="text-sm font-bold text-white uppercase tracking-wider">Round 1: Four-Ball</h2>
-                </div>
+    <!-- Selections Table -->
+    <div class="bg-slate-800/40 rounded-xl border border-slate-700/60 overflow-hidden shadow-xl">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs">
+          <thead id="tableHeader" class="bg-slate-800/90 text-slate-300 border-b border-slate-700 uppercase text-[11px] font-bold tracking-wider">
+            <!-- Dynamic Headers -->
+          </thead>
+          <tbody id="tableBody" class="divide-y divide-slate-800/80 text-slate-300 font-medium">
+            <!-- Dynamic Rows -->
+          </tbody>
+        </table>
+      </div>
+    </div>
 
-                <!-- 3 Groups Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                    
-                    <!-- Group 1 Card -->
-                    <div class="bg-slate-800/60 border border-slate-700/60 rounded-xl overflow-hidden shadow-lg">
-                        <div class="bg-slate-800/90 px-3 py-1.5 border-b border-slate-700/60 flex items-center justify-between text-[11px] font-semibold">
-                            <span class="text-slate-300">Group 1 • 11:30 AM</span>
-                            <span class="text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded text-[10px] border border-emerald-500/20">Four-Ball</span>
-                        </div>
-                        <div class="p-3 flex items-center justify-between text-xs font-semibold">
-                            <!-- Team USA (Left aligned) -->
-                            <div class="w-[42%] text-right text-slate-100 truncate">
-                                L. Jackman <span class="text-rose-400 font-mono text-[11px]">(3)</span><br>
-                                J. Gubbins <span class="text-rose-400 font-mono text-[11px]">(4)</span>
-                            </div>
-                            <!-- Centered VS -->
-                            <div class="w-[16%] text-center">
-                                <span class="text-[10px] font-black text-slate-500 bg-slate-900 px-1.5 py-0.5 rounded border border-slate-700">VS</span>
-                            </div>
-                            <!-- Team Europe (Right aligned) -->
-                            <div class="w-[42%] text-left text-slate-100 truncate">
-                                D. Steele<span class="text-sky-400 font-mono text-[11px]">(0)</span><br>
-                                F. Offley <span class="text-sky-400 font-mono text-[11px]">(9)</span>
-                            </div>
-                        </div>
-                    </div>
+  </div>
 
-                    <!-- Group 2 Card -->
-                    <div class="bg-slate-800/60 border border-slate-700/60 rounded-xl overflow-hidden shadow-lg">
-                        <div class="bg-slate-800/90 px-3 py-1.5 border-b border-slate-700/60 flex items-center justify-between text-[11px] font-semibold">
-                            <span class="text-slate-300">Group 2 • 11:40 AM</span>
-                            <span class="text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded text-[10px] border border-emerald-500/20">Four-Ball</span>
-                        </div>
-                        <div class="p-3 flex items-center justify-between text-xs font-semibold">
-                            <!-- Team USA (Left aligned) -->
-                            <div class="w-[42%] text-right text-slate-100 truncate">
-                                P. Keenan <span class="text-rose-400 font-mono text-[11px]">(0)</span><br>
-                                J. Somerville <span class="text-rose-400 font-mono text-[11px]">(8)</span>
-                            </div>
-                            <!-- Centered VS -->
-                            <div class="w-[16%] text-center">
-                                <span class="text-[10px] font-black text-slate-500 bg-slate-900 px-1.5 py-0.5 rounded border border-slate-700">VS</span>
-                            </div>
-                            <!-- Team Europe (Right aligned) -->
-                            <div class="w-[42%] text-left text-slate-100 truncate">
-                                F. Filce <span class="text-sky-400 font-mono text-[11px]">(10)</span><br>
-                                J. Hayden <span class="text-sky-400 font-mono text-[11px]">(12)</span>
-                            </div>
-                        </div>
-                    </div>
+  <script>
+    // Updated Script URL pointing to your deployment
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxJJEuJRZ2xui_lEFFKxX-slTN-cDVzk2ib0wx0F1YJOkIkTsSac2UxHUrlgxtHv0LyIA/exec?type=selections";
 
-                    <!-- Group 3 Card -->
-                    <div class="bg-slate-800/60 border border-slate-700/60 rounded-xl overflow-hidden shadow-lg">
-                        <div class="bg-slate-800/90 px-3 py-1.5 border-b border-slate-700/60 flex items-center justify-between text-[11px] font-semibold">
-                            <span class="text-slate-300">Group 3 • 11:50 AM</span>
-                            <span class="text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded text-[10px] border border-emerald-500/20">Four-Ball</span>
-                        </div>
-                        <div class="p-3 flex items-center justify-between text-xs font-semibold">
-                            <!-- Team USA (Left aligned) -->
-                            <div class="w-[42%] text-right text-slate-100 truncate">
-                                D. Walker <span class="text-rose-400 font-mono text-[11px]">(1)</span><br>
-                                J. Greetham <span class="text-rose-400 font-mono text-[11px]">(14)</span>
-                            </div>
-                            <!-- Centered VS -->
-                            <div class="w-[16%] text-center">
-                                <span class="text-[10px] font-black text-slate-500 bg-slate-900 px-1.5 py-0.5 rounded border border-slate-700">VS</span>
-                            </div>
-                            <!-- Team Europe (Right aligned) -->
-                            <div class="w-[42%] text-left text-slate-100 truncate">
-                                M. Wilson <span class="text-sky-400 font-mono text-[11px]">(0)</span><br>
-                                J. Miller <span class="text-sky-400 font-mono text-[11px]">(2)</span>
-                            </div>
-                        </div>
-                    </div>
+    async function loadSelections() {
+      const statusMsg = document.getElementById('statusMsg');
+      const tableHeader = document.getElementById('tableHeader');
+      const tableBody = document.getElementById('tableBody');
 
-                </div>
-            </section>
+      statusMsg.textContent = "Fetching selections...";
+      statusMsg.classList.remove('hidden', 'bg-red-950/50', 'text-red-300', 'border-red-800');
+      statusMsg.classList.add('bg-indigo-950/50', 'text-indigo-300', 'border-indigo-800');
 
-            <!-- ROUND 3: SCRAMBLE -->
-            <section class="space-y-3 pt-2">
-                <div class="flex items-center space-x-2 border-b border-slate-700/80 pb-2">
-                    <div class="p-1 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
-                    </div>
-                    <h2 class="text-sm font-bold text-white uppercase tracking-wider">Round 2: Scramble</h2>
-                </div>
+      try {
+        const response = await fetch(SCRIPT_URL);
+        const data = await response.json();
 
-                <!-- 3 Groups Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                    
-                    <!-- Group 1 Card -->
-                    <div class="bg-slate-800/60 border border-slate-700/60 rounded-xl overflow-hidden shadow-lg">
-                        <div class="bg-slate-800/90 px-3 py-1.5 border-b border-slate-700/60 flex items-center justify-between text-[11px] font-semibold">
-                            <span class="text-slate-300">Group 1 • 10:30 AM</span>
-                            <span class="text-amber-400 bg-amber-500/10 px-1.5 py-0.5 rounded text-[10px] border border-amber-500/20">Scramble</span>
-                        </div>
-                        <div class="p-3 flex items-center justify-between text-xs font-semibold">
-                            <!-- Team USA (Left aligned) -->
-                            <div class="w-[42%] text-right text-slate-100 truncate">
-                                L. Jackman &<br>
-                                J. Somerville <span class="text-rose-400 font-mono text-[11px]">(0)</span>
-                            </div>
-                            <!-- Centered VS -->
-                            <div class="w-[16%] text-center">
-                                <span class="text-[10px] font-black text-slate-500 bg-slate-900 px-1.5 py-0.5 rounded border border-slate-700">VS</span>
-                            </div>
-                            <!-- Team Europe (Right aligned) -->
-                            <div class="w-[42%] text-left text-slate-100 truncate">
-                                D. Steele &<br>
-                                J. Hayden <span class="text-sky-400 font-mono text-[11px]">(0)</span>
-                            </div>
-                        </div>
-                    </div>
+        if (data.error) {
+          throw new Error(data.error);
+        }
 
-                    <!-- Group 2 Card -->
-                    <div class="bg-slate-800/60 border border-slate-700/60 rounded-xl overflow-hidden shadow-lg">
-                        <div class="bg-slate-800/90 px-3 py-1.5 border-b border-slate-700/60 flex items-center justify-between text-[11px] font-semibold">
-                            <span class="text-slate-300">Group 2 • 10:40 AM</span>
-                            <span class="text-amber-400 bg-amber-500/10 px-1.5 py-0.5 rounded text-[10px] border border-amber-500/20">Scramble</span>
-                        </div>
-                        <div class="p-3 flex items-center justify-between text-xs font-semibold">
-                            <!-- Team USA (Left aligned) -->
-                            <div class="w-[42%] text-right text-slate-100 truncate">
-                                J. Gubbins &</span><br>
-                                D. Walker <span class="text-rose-400 font-mono text-[11px]">(0)</span>
-                            </div>
-                            <!-- Centered VS -->
-                            <div class="w-[16%] text-center">
-                                <span class="text-[10px] font-black text-slate-500 bg-slate-900 px-1.5 py-0.5 rounded border border-slate-700">VS</span>
-                            </div>
-                            <!-- Team Europe (Right aligned) -->
-                            <div class="w-[42%] text-left text-slate-100 truncate">
-                                F. Offley &<br>
-                                M. Wilson <span class="text-sky-400 font-mono text-[11px]">(2)</span>
-                            </div>
-                        </div>
-                    </div>
+        statusMsg.classList.add('hidden');
 
-                    <!-- Group 3 Card -->
-                    <div class="bg-slate-800/60 border border-slate-700/60 rounded-xl overflow-hidden shadow-lg">
-                        <div class="bg-slate-800/90 px-3 py-1.5 border-b border-slate-700/60 flex items-center justify-between text-[11px] font-semibold">
-                            <span class="text-slate-300">Group 3 • 10:50 AM</span>
-                            <span class="text-amber-400 bg-amber-500/10 px-1.5 py-0.5 rounded text-[10px] border border-amber-500/20">Scramble</span>
-                        </div>
-                        <div class="p-3 flex items-center justify-between text-xs font-semibold">
-                            <!-- Team USA (Left aligned) -->
-                            <div class="w-[42%] text-right text-slate-100 truncate">
-                                P. Keenan &<br>
-                                J. Greetham <span class="text-rose-400 font-mono text-[11px]">(0)</span>
-                            </div>
-                            <!-- Centered VS -->
-                            <div class="w-[16%] text-center">
-                                <span class="text-[10px] font-black text-slate-500 bg-slate-900 px-1.5 py-0.5 rounded border border-slate-700">VS</span>
-                            </div>
-                            <!-- Team Europe (Right aligned) -->
-                            <div class="w-[42%] text-left text-slate-100 truncate">
-                                F. Filce &<br>
-                                J. Miller <span class="text-sky-400 font-mono text-[11px]">(2)</span>
-                            </div>
-                        </div>
-                    </div>
+        if (!data || data.length === 0) {
+          tableHeader.innerHTML = '';
+          tableBody.innerHTML = `<tr><td class="p-8 text-center text-slate-500">No entry records found in the Selections sheet.</td></tr>`;
+          document.getElementById('visibleCount').textContent = 0;
+          return;
+        }
 
-                </div>
-            </section>
-            
-<!-- ROUND 3: SINGLES -->
-            <section class="space-y-3 pt-2">
-                <div class="flex items-center space-x-2 border-b border-slate-700/80 pb-2">
-                    <div class="p-1 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
-                    </div>
-                    <h2 class="text-sm font-bold text-white uppercase tracking-wider">Round 3: Singles</h2>
-                </div>
+        renderSelectionsTable(data);
 
-                <!-- 3 Groups Grid -->
-                <div class="text-left text-slate-100 truncate">
-TBC
-                </div>
-            </section>
-            
-        </div>
-    </main>
+      } catch (error) {
+        console.error("Fetch error:", error);
+        statusMsg.textContent = "Failed to load selections: " + error.message;
+        statusMsg.classList.remove('hidden', 'bg-indigo-950/50', 'text-indigo-300', 'border-indigo-800');
+        statusMsg.classList.add('bg-red-950/50', 'text-red-300', 'border-red-800');
+      }
+    }
+
+   function renderSelectionsTable(items) {
+  const tableHeader = document.getElementById('tableHeader');
+  const tableBody = document.getElementById('tableBody');
+
+  // Map sheet column names to custom display titles
+  const headerMap = {
+    'R1 Selection 1': 'Four Ball 1',
+    'R1 Selection 2': 'Four Ball 2',
+    'R2 Selection 1': 'Scramble 1',
+    'R2 Selection 2': 'Scramble 2',
+    'R3 Selection 1': 'Singles 1',
+    'R3 Selection 2': 'Singles 2'
+  };
+
+  // Extract raw column keys and filter OUT the Captain column header
+  const rawColumns = Object.keys(items[0]);
+  const visibleColumns = rawColumns.filter(col => !col.toLowerCase().includes('captain'));
+
+  // Render Headers using mapped names (or fallback to original name if not in map)
+  tableHeader.innerHTML = `
+    <tr>
+      <th class="px-4 py-3 border-b border-slate-700 w-12 text-center text-slate-500">#</th>
+      ${visibleColumns.map(col => `
+        <th class="px-4 py-3 border-b border-slate-700 whitespace-nowrap">${headerMap[col] || col}</th>
+      `).join('')}
+    </tr>
+  `;
+
+  // Helper to format values
+  const formatCellValue = (colName, cellVal, captainName) => {
+    if (!cellVal) return '<span class="text-slate-600">-</span>';
+
+    const key = colName.toLowerCase();
+
+    // Style Participant Name
+    if (key === 'name') {
+      return `<span class="font-bold text-white text-sm">${cellVal}</span>`;
+    }
+
+    // Check if this selection matches the row's Captain selection
+    const isCaptainMatch = captainName && String(cellVal).trim().toLowerCase() === String(captainName).trim().toLowerCase();
+
+    if (isCaptainMatch) {
+      return `<span class="inline-flex items-center space-x-1 font-bold text-amber-300 bg-amber-500/10 border border-amber-500/30 px-2.5 py-1 rounded-lg">
+                <span>👑</span> <span>${cellVal}</span>
+              </span>`;
+    }
+
+    // Standard golfer selection
+    return `<span class="text-slate-200 bg-slate-900/80 px-2.5 py-1 rounded-md border border-slate-700/80 whitespace-nowrap">${cellVal}</span>`;
+  };
+
+  // Render Rows
+  tableBody.innerHTML = items.map((row, index) => {
+    // Find the captain's name for this specific row
+    const captainKey = rawColumns.find(col => col.toLowerCase().includes('captain'));
+    const captainName = captainKey ? row[captainKey] : null;
+
+    return `
+      <tr class="hover:bg-slate-800/60 transition-colors">
+        <td class="px-4 py-3.5 whitespace-nowrap text-center text-slate-500 font-mono text-xs">${index + 1}</td>
+        ${visibleColumns.map(col => `
+          <td class="px-4 py-3.5 whitespace-nowrap">${formatCellValue(col, row[col], captainName)}</td>
+        `).join('')}
+      </tr>
+    `;
+  }).join('');
+
+  document.getElementById('visibleCount').textContent = items.length;
+}
+
+    window.addEventListener('DOMContentLoaded', loadSelections);
+  </script>
 
 </body>
 </html>
